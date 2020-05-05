@@ -1,0 +1,473 @@
+* {
+    font-family: 'Montserrat', cursive, sans-serif;
+    color: #000;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+/*Color Scheme https://coolors.co/ff5700-692705-9c5935-cf8b64-d59a7a-ddb19b-e5c7bc-ffffff*/
+
+#header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    border-bottom: 1px solid black; 
+}
+
+#header-links-accounts {
+    position: absolute;
+    display: inline-block;
+    top: 15px;
+    right: 30px;
+}
+
+#header-links-account-logged-in {
+    position: absolute;
+    display: inline-block;
+    top: 15px;
+    right: 30px;
+}
+
+#menu-icon {
+    filter: invert(100%);
+}
+
+#jump-starter {
+    width: 100%;
+    height: 600px;
+}
+
+.menu-icon {
+    text-decoration: none;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+.links-header {
+    position: relative;
+    float: left;
+}
+
+.account-links-header {
+    float: right;
+}
+
+.account-links-header-logged-in {
+    float: right;
+    min-width: 100px;
+}
+
+.account-links-header-logged-in a {
+    text-decoration: none;
+    color: #000;
+}
+
+.account-links-header a {
+    text-decoration: none;
+    color: #000;
+}
+
+.dropbtn {
+    border: 0;
+    padding: 0 4px 0 4px;
+    background-color: transparent;
+    color: #FFFFFF;
+    font-size: 16px;
+    border-radius: 5px 5px 0 0;
+}
+
+.login {
+    padding: 0 4px 0 4px;
+}
+
+.dropdown-content-header {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content-header a {
+    text-decoration: none;
+    color: #000;
+    padding: 12px 16px;
+    display: block;
+}
+
+.learn-more-button {
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    top: 370px;
+    right: 640px;
+}
+
+.learn-more:hover {
+    width: 120px;
+    height: 50px;
+    background-color: #692705;
+    color: #CF8B64
+}
+
+.learn-more {
+    font-size: 15px;
+    width: 100px;
+    height: 40px;
+    padding: 0.7em 6px 0.7em 6px;
+    background-color: #CF8B64;
+    border-radius: 10px;
+    color: #FFFFFF;
+    transition: width 0.7s, height 0.7s, background-color 0.7s, color 0.7s;
+}
+
+.spacer {
+    position: absolute;
+    width: 100%;
+    top: 590px;
+    height: 1em;
+    z-index: 1;
+    background-color: #FFFFFF;
+}
+
+.background-image {
+    width: 100%;
+    height: 100%;
+    filter: blur(3px);
+}
+
+.bind-div {
+    position: absolute;
+    top: 40%;
+    right: 40%;
+}
+
+.bind {
+    font-size: 50px;
+    color: #FFFFFF;
+}
+
+.tail-div {
+    position: absolute;
+    top: 50%;
+    right: 43%;
+}
+
+.tail {
+    color: #FFFFFF;
+}
+
+.links-header:hover .dropdown-content-header {display: block;}
+
+.links-header:hover .dropdown-content-header a {background-color: #E5C7BC;}
+.links-header:hover .dropdown-content-header a:hover {background-color: #692705; color: #CF8B64;} /*FF5700 */
+.links-header:hover .dropbtn {background-color: #E5C7BC; color:#000;}
+
+/*sign up styling */
+
+#signup-div {
+    position: absolute;
+    right: 33%;
+    top: 25%;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 500px;
+    height: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+}
+
+.big-sign-up {
+    position: absolute;
+    top: 6px;
+    left: 180px;
+    min-width: 150px;
+}
+
+.singup-div {
+    position: relative;
+    top: 30px;
+    width: 185px;
+    height: 100%;
+}
+
+.username-pass-div-signup {
+    position: relative;
+    top: 10px;
+    left: 30px;
+}
+
+.username-label-signup {
+    position: absolute;
+    top: 43px;
+    left: 30px;
+    font-size: 20px;
+}
+
+.username-signup {
+    position: absolute;
+    top: 66px;
+    left: 30px;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+.username-error-signup {
+    color: red;
+    position: absolute;
+    font-size: 10px;
+    min-width: 170px;
+    top: 85px;
+    left: 29px;
+}
+
+.email-label-signup {
+    position: absolute;
+    top: 43px;
+    left: 240px;
+    font-size: 20px;
+}
+
+.email-signup {
+    position: absolute;
+    top: 66px;
+    left: 240px;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+.email-error-signup {
+    color: red;
+    position: absolute;
+    top: 85px;
+    left: 239px;
+    font-size: 10px;
+    min-width: 190px;
+}
+
+.password-label-signup {
+    position: absolute;
+    top: 106px;
+    left: 30px;
+    font-size: 20px;
+}
+
+.password-signup {
+    position: absolute;
+    top: 128px;
+    left: 30px;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+.password-error-signup-div {
+    position: absolute;
+    top: 145px;
+    left: 29px;
+    display: inline-block;
+    width: 380px;
+}
+
+.password-error-signup {
+    color: red;
+    font-size: 10px;
+    min-width: auto;
+}
+
+.confirm-pass-label-signup {
+    position: absolute;
+    top: 107px;
+    left: 240px;
+    font-size: 20px;
+    min-width: 200px;
+}
+
+.confirm-pass-signup {
+    position: absolute;
+    top: 128px;
+    left: 240px;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+
+.sign-up-button {
+    position: relative;
+    top: 60px;
+    left: 167px;
+    padding: 10px 10px;
+    width: 100px;
+    background-color: #FF5700;
+    color: white;
+    border: 0;
+    border-radius: 3px;
+    font-size: 17px;
+    transition: background-color 0.7s, color 0.7s;
+}
+
+.sign-up-button:hover {
+    background-color: #D59A7A;
+    color: black;
+}
+
+/* Sign in styles */
+
+#sign-in-div {
+    position: absolute;
+    right: 33%;
+    top: 25%;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 500px;
+    height: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+}
+
+.big-sign-in {
+    position: absolute;
+    top: 6px;
+    left: 60px;
+}
+
+.login-div {
+    position: relative;
+    top: 30px;
+    width: 185px;
+    height: 100%;
+}
+
+.username-pass-div-signin {
+    position: relative;
+    top: 10px;
+    left: 30px;
+}
+
+.username-label-login {
+    position: absolute;
+    top: 43px;
+    left: 10px;
+    font-size: 20px;
+}
+
+.username-login {
+    position: absolute;
+    top: 66px;
+    left: 10px;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+.username-error-signin {
+    color: red;
+    font-size: 15px;
+    min-width: 20px;
+    position: absolute;
+    top: 83px;
+    left: 9px;
+}
+
+.password-label-login {
+    position: absolute;
+    top: 106px;
+    left: 10px;
+    font-size: 20px;
+}
+
+.password-login {
+    position: absolute;
+    top: 128px;
+    left: 10px;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+.password-error-signin {
+    color: red;
+    font-size: 15px;
+    min-width: 20px;
+    position: absolute;
+    top: 145px;
+    left: 9px;
+}
+
+.error-messages-signin {
+    position: absolute;
+    top: 150px;
+    left: 8px;
+}
+
+.remember-me-label-login {
+    position: absolute;
+    top: 170px;
+    left: 23px;
+    width: 130px;
+    height: 20px;
+}
+
+.remember-me-login {
+    position: absolute;
+    top: 173px;
+    left: 9px;
+}
+
+.sign-in-button-login {
+    position: relative;
+    top: 120px;
+    left: 40px;
+    padding: 7px 5px;
+    width: 100px;
+    background-color: #FF5700;
+    color: white;
+    border: 0;
+    border-radius: 3px;
+    transition: background-color 0.7s, color 0.7s;
+}
+
+.sign-in-button-login:hover {
+    background-color: #D59A7A;
+    color: black;
+}
+
+.side-div-login {
+    position: absolute;
+    top: 15px;
+    right: 252px;
+    height: 270px;
+    width: 2px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.sign-up-div-login {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    height: 100%;
+    max-width: 200px;
+}
+
+.join-foxtail {
+    position: relative;
+    top: 49px;
+    left: 22px;
+    text-decoration: none;
+    background-color: #FF5700;
+    color: white;
+    padding: 8px 28px;
+    border-radius: 5px;
+    font-size: 13px;
+    transition: background-color 0.7s, color 0.7s;
+}
+
+.join-foxtail:hover {
+    background-color: #CF8B64;
+    color: black;
+}
+
+/*account display*/
+
+.username-display-account {
+    position: absolute;
+    top: 50px;
+}

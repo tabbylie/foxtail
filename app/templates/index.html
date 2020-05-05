@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% if title %}
+            <title>FOXTAIL | {{ title }}</title>
+        {% else %}
+            <title>FOXTAIL</title>
+        {% endif %}
+        <meta charset="utf-8">
+        <meta name="viewport", value="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="../static/logo-1.png">
+        <link rel="stylesheet" type="text/css" href="../static/index.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="header">
+            <button class="menu-icon" style="display: none;"><input id="menu-icon" style="display: none;" type="image" name="style" src="https://image.flaticon.com/icons/svg/149/149176.svg" width="50" onclick="trans()" /></button>
+            <a href="/" style="text-decoration: none;"><input id="favicon" type="image" name="logo" src="../static/logo-1.png" width=100 height=50/></button></a>
+            {% if current_user.is_anonymous %}
+                <div id="header-links-accounts">
+                    <span class="links-header">
+                        <button class="dropbtn">Links</button>
+                        <div class="dropdown-content-header">
+                            <a href="/products">Products</a>
+                            <a href="/service">Support</a>
+                            <a href="/termsofservice">Terms of Service</a>
+                            <a href="/aboutus">About us</a>
+                        </div>
+                    </span>
+                    {% if current_user.is_anonymous %}
+                        <span class="account-links-header">
+                            <a class="login" href="/account/login">Login</a>
+                            <a class="signup" href="/account/register">Sign Up</a>
+                        </span>
+                    {% else %}
+                        <span class="account-links-header-logged-in">    
+                            <p style="color: white;">{{ current_user.username }}</p>
+                            <a class="logout" href="/account/logout">Log Out</a>
+                        </span>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div id="header-links-account-logged-in">
+                    <span class="links-header">
+                        <button class="dropbtn">Links</button>
+                        <div class="dropdown-content-header">
+                            <a href="/products">Products</a>
+                            <a href="/service">Support</a>
+                            <a href="/termsofservice">Terms of Service</a>
+                            <a href="/aboutus">About us</a>
+                        </div>
+                    </span>
+                    {% if current_user.is_anonymous %}
+                        <span class="account-links-header">
+                            <a class="login" href="/account/login">Login</a>
+                            <a class="signup" href="/account/register">Sign Up</a>
+                        </span>
+                    {% else %}
+                        <span class="account-links-header-logged-in">    
+                            <button class="user-account"><a href="/account/{{ current_user.username }}">{{ current_user.username }}</a></button>
+                            <a class="logout" href="/account/logout" style="">Log Out</a>
+                        </span>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+        <div id="jump-starter">
+            <img class="background-image" src="../static/coding-image.png" alt="background image" />
+            <div class="bind-div">
+                <p class="bind">IN A BIND?</p>
+            </div>
+            <div class="tail-div">
+                <p class="tail">Let us lend you our tail.</p>
+            </div>
+            <div class="learn-more-button">
+                <a href="/products"><button class="learn-more" type="button" name="Learn More" value="Learn More">Learn More</button></a>
+            </div>
+            <div class="spacer"></div>
+        </div>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul style="position: absolute; top: ">
+                {% for message in messages %}
+                <li style="color: white; background-color: red; padding: 5px;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+        <script type="text/javascript" >
+            var onImg = "https://image.flaticon.com/icons/svg/149/149176.svg";
+            var offImg = "https://image.flaticon.com/icons/svg/149/149147.svg";
+            function trans() {
+                img = document.getElementById("menu-icon");
+                img.src = img.src == offImg ? onImg : offImg;
+            }
+        </script>
+    </body>
+</html>
+        
