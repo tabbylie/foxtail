@@ -96,10 +96,10 @@
 
 .learn-more-button {
     position: absolute;
+    top: 390px;
+    right: 590px;
     width: 100px;
     height: 20px;
-    top: 370px;
-    right: 630px;
 }
 
 .learn-more:hover {
@@ -113,7 +113,7 @@
     font-size: 15px;
     width: 100px;
     height: 40px;
-    padding: 0.7em 6px 0.7em 6px;
+    transform: translate(-50%, -50%);
     background-color: #CF8B64;
     border-radius: 10px;
     color: #FFFFFF;
