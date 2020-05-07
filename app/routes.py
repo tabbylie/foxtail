@@ -122,3 +122,7 @@ def aboutus():
 		</body>
 	</html>
 	'''
+
+@app.route('/about_the_devs')
+def ATD():
+	return render_template('about_the_devs.html', title='about the devs')
