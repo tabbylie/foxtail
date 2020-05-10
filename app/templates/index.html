@@ -8,6 +8,7 @@
         {% endif %}
         <meta charset="utf-8">
         <meta name="viewport", value="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <link rel="icon" type="image/png" href="../static/logo-1.png">
         <link rel="stylesheet" type="text/css" href="../static/index.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -79,15 +80,7 @@
             </div>
             <div class="spacer"></div>
         </div>
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <ul style="position: absolute; top: ">
-                {% for message in messages %}
-                <li style="color: white; background-color: red; padding: 5px;">{{ message }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            {% endwith %}
+        
         <script type="text/javascript" >
             var onImg = "https://image.flaticon.com/icons/svg/149/149176.svg";
             var offImg = "https://image.flaticon.com/icons/svg/149/149147.svg";
@@ -98,4 +91,3 @@
         </script>
     </body>
 </html>
-        
