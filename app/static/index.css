@@ -11,6 +11,8 @@
     top: 0;
     width: 100%;
     z-index: 1;
+    background-color: #FBF6F4;
+    border-radius: 0 0 5px 5px;
 }
 
 #header-links-accounts {
@@ -59,19 +61,16 @@
 
 .account-links-header-logged-in a {
     text-decoration: none;
-    color: #FFFFFF;
 }
 
 .account-links-header a {
     text-decoration: none;
-    color: #FFFFFF;
 }
 
 .dropbtn {
     border: 0;
     padding: 0 4px 0 4px;
     background-color: transparent;
-    color: #FFFFFF;
     font-size: 16px;
     border-radius: 5px 5px 0 0;
 }
@@ -84,6 +83,7 @@
     display: none;
     position: absolute;
     min-width: 160px;
+    border-radius: 0 0 5px 5px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
@@ -105,6 +105,7 @@
 .learn-more:hover {
     width: 120px;
     height: 50px;
+    font-size: 19px;
     background-color: #692705;
     color: #CF8B64
 }
@@ -117,7 +118,7 @@
     background-color: #CF8B64;
     border-radius: 10px;
     color: #FFFFFF;
-    transition: width 0.7s, height 0.7s, background-color 0.7s, color 0.7s;
+    transition: width 0.7s, height 0.7s, background-color 0.7s, color 0.7s, font-size 0.7s;
 }
 
 .user-account {
@@ -130,13 +131,23 @@
     background-color: transparent;
 }
 
+.top-spacer {
+    position: absolute;
+    width: 100%;
+    top: 596px;
+    height: 7px;
+    z-index: 1;
+    background-color: #CF8B64;
+}
+
 .spacer {
     position: absolute;
     width: 100%;
-    top: 590px;
-    height: 1em;
+    top: 603px;
+    height: 3em;
     z-index: 1;
-    background-color: #FFFFFF;
+    background-color: #CF8B64;
+    clip-path: polygon(100% 0%, 0 0, 49% 100%);
 }
 
 .background-image {
@@ -165,6 +176,36 @@
 .tail {
     color: #FFFFFF;
 }
+
+.requirements {
+    position: absolute;
+    top: 700px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+    z-index: 3;
+}
+
+.requirements span {
+    padding: 0 20px;
+    max-width: 400px;
+}
+
+.requirements img {
+    position: relative;
+    right: 1%;
+    width: 35px;
+    height: 35px;
+    padding-bottom: 10px;
+}
+
+.requirements p {
+    padding-top: 10px;
+    font-size: 15px;
+}
+
 
 .links-header:hover .dropdown-content-header {display: block;}
 

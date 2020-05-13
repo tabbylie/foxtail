@@ -87,6 +87,7 @@
     display: none;
     position: absolute;
     min-width: 160px;
+    border-radius: 5px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
@@ -492,8 +493,59 @@
     background: #E5C7BC;
     border: 1px solid black;
     border-radius: 10px;
+    max-width: 250px;
     padding: 3px 10px;
     margin-left: 10px;
+    box-shadow: 2px 2px 4px pink;
+}
+
+#container-ATD p {
+    padding: 5px 0;
+}
+
+#container-ATD h1 {
+    padding: 5px 0;
+}
+
+.links-ATD {
+    padding: 5px 0;
+    height: 20px;
+    width: 100%;
+}
+.links-ATD a {
+    text-decoration: none;
+}
+
+
+.account-lasix {
+    font-size: 16px;
+    transition: font-size 0.7s, color 0.7s;
+}
+
+.account-lasix:hover {
+    font-size: 20px;
+    color: #FF5700;
+}
+
+.email-lasix {
+    font-size: 16px;
+    transition: font-size 0.7s, color 0.7s;
+}
+
+.email-lasix:hover {
+    font-size: 20px;
+    color: #FF5700;
+}
+
+.phone-lasix {
+    font-size: 16px;
+    color: #000;
+    transition: font-size 0.7s, color 0.7s;
+}
+
+.phone-lasix:hover {
+    font-size: 20px;
+    color: #FF5700;
 }
 
 .img-ATD {
@@ -502,4 +554,5 @@
     width: 100px;
     margin: 0 auto;
     border-radius: 10px;
+    padding: 5px 0;
 }
