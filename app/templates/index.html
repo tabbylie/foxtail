@@ -61,7 +61,7 @@
                     {% else %}
                         <span class="account-links-header-logged-in">    
                             <button class="user-account"><a href="/account/{{ current_user.username }}">{{ current_user.username }}</a></button>
-                            <a class="logout" href="/account/logout" style="">Log Out</a>
+                            <a class="logout" href="/account/logout">Log Out</a>
                         </span>
                     {% endif %}
                 </div>
@@ -78,9 +78,26 @@
             <div class="learn-more-button">
                 <a href="/products"><button class="learn-more" type="button" name="Learn More" value="Learn More">Learn More</button></a>
             </div>
+            <div class="top-spacer"></div>
             <div class="spacer"></div>
         </div>
-        
+        <div class="requirements">
+            <span class="reliability">
+                <img src="../static/index_all.svg" alt="why us image" />
+                <h1>Reliability</h1>
+                <p>Foxtails first priority is customer satisfaction, and we are willing to do whats necessary for it. Having great service, and cooperative staff, we are dedicated to the service of you.</p>
+            </span>
+            <span class="trustworthy">
+                <img class="svg-img" src="../static/index_all.svg" alt="why us image" />
+                <h1>Trustworthy</h1>
+                <p>With amazing speed and top quality applications, we are here to give you amazing applications at an affordable price. Fixing bugs and testing BEFORE we hand over the application, we can only guarantee top quality applications.</p>
+            </span>
+            <span class="affordable">
+                <img src="../static/index_all.svg" alt="why us image" />
+                <h1>Affordability</h1>
+                <p>We build applications for an very affordable price, and allow for amazing customability. We are very affordable for small businesses and indivuals alike, for the quality we make!</p>
+            </span>
+        </div>
         <script type="text/javascript" >
             var onImg = "https://image.flaticon.com/icons/svg/149/149176.svg";
             var offImg = "https://image.flaticon.com/icons/svg/149/149147.svg";
