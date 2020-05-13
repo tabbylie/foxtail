@@ -20,3 +20,12 @@ class User(UserMixin, db.Model):
 
 	def __repr__(self):
 		return f'<User {self.username}>'
+
+class Products(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String(64), index=True, unique=True)
+	desc = db.Column(db.String(128), index=True, unique=True)
+	price = db.Column(db.Float, index=True, unique=True)
+
+	def __repr__(self):
+		return f'<Product {self.name}>'

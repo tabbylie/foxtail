@@ -516,7 +516,6 @@
     text-decoration: none;
 }
 
-
 .account-lasix {
     font-size: 16px;
     transition: font-size 0.7s, color 0.7s;
@@ -555,4 +554,30 @@
     margin: 0 auto;
     border-radius: 10px;
     padding: 5px 0;
+}
+
+/* Products css */
+
+.container-products {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
+
+.product-div-products {
+    border: 3px solid black;
+    border-radius: 10px;
+    text-align: center;
+    margin: 0 10px;
+}
+
+.product-div-products h1, p, button {
+    padding: 5px 10px;
 }

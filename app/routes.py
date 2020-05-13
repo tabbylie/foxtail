@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, request
 from app import app, db
 from app.forms import LoginForm, SignUpForm
-from app.models import User
+from app.models import User, Products
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
@@ -12,20 +12,8 @@ def index():
 
 @app.route('/products')
 def products():
-	return '''
-	<html>
-		<head>
-			<title>FOXTAIL | ERROR</title>
-		</title>
-		<body>
-			<center>
-				<h1 style="color: #ff0000">404</h1>
-				<p>File not Found</p>
-				<a href="/">Go Back</a>
-			<center>
-		</body>
-	</html>
-	'''
+	product = Products.query.all()
+	return render_template('products.html', title="Products", products=product)
 
 @app.route('/account/login', methods=['GET', 'POST'])
 def login():
