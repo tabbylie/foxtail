@@ -1,19 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
+    <div id="current-products">
+        <h1>Current Products</h1>
+    </div>
     <div class="container-products">
-    	<table>
-		<tr>
-			<th>Name</th>
-			<th>Description</th>
-			<th>Price</th>
-		</tr>
-		{% for product in products %}
-			<td>
-				<th>{{ product.name }}</th>
-				<th>{{ product.desc }}</th>
-				<th>{{ product.price }}</th>
-			</td>
-		{% endfor %}
-	</table>
+        <table>
+            <thead>
+                <tr class="trhead-products">
+                    <th>Name</th>
+                    <th class="desc-products">Description</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td class="name-products">{{ product.name }}</td>
+                        <td class="description">{{ product.desc }}</td>
+                        <td>${{ product.price }}</td>
+                        <th class="button-td-products"><a href="/products/customize/{{ product.name }}">Customize</a></th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

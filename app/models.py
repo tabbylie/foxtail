@@ -25,7 +25,7 @@ class Products(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(64), index=True, unique=True)
 	desc = db.Column(db.String(128), index=True, unique=True)
-	price = db.Column(db.Float, index=True, unique=True)
+	price = db.Column(db.Float, index=True)
 
 	def __repr__(self):
 		return f'<Product {self.name}>'

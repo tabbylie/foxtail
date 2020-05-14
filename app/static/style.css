@@ -6,14 +6,17 @@
     margin: 0;
 }
 
+
+
 /*Color Scheme https://coolors.co/ff5700-692705-9c5935-cf8b64-d59a7a-ddb19b-e5c7bc-ffffff*/
 
 #header {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
     border-bottom: 1px solid black; 
+    background-color: white;
 }
 
 #header-links-accounts {
@@ -120,9 +123,20 @@
     padding: 0.7em 6px 0.7em 6px;
     background-color: #CF8B64;
     border-radius: 10px;
-    color: #FFFFFF;
+    color: #000;
     transition: width 0.7s, height 0.7s, background-color 0.7s, color 0.7s;
 }
+
+.user-account {
+    color: #000;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    padding-left: 3px;
+    padding-right: 3px;
+    font-size: 16px;
+    background-color: transparent;
+}
+
 
 .spacer {
     position: absolute;
@@ -559,25 +573,89 @@
 /* Products css */
 
 .container-products {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    margin: 0 10px;
+    position: relative;
+    top: 200px;
+    width: 100%;
+    height: 608px;
 }
 
-.product-div-products {
-    border: 3px solid black;
-    border-radius: 10px;
+.container-products table {
+    border-collapse: separate;
+    border-spacing: 0px 1.5em;
+    position: relative;
+    padding: 10px;
+    width: 100%;
+}
+
+.container-products thead {
+    width: 100%;
+}
+
+.container-products tbody {
+    width: 100%;
+}
+
+.container-products table td {
+    background-color: #E1BCAC;
+    color: black;
+    padding: 30px 45px;
+    line-height: 21px;
+}
+
+.container-products table th {
+    color: #692705;
+    
+}
+
+.button-td-products {
+    border-left: 1px solid black;
+    background-color: #D58558;
+    color: #ffffff;
+    line-height: 21px;
+    border-radius: 0 5px 5px 0;
+}
+
+.container-products table th a {
+    background-color: #FF5700;
+    color: white;
+    padding: 9px 12px;
+    border-radius: 100px;
+    transition: transform 0.7s;
+    text-decoration: none;
+}
+
+.container-products table th a:hover {
+    transform: translateX(8px);
+}
+
+.container-products table td:first-child {
+    border-radius: 5px 0 0 5px;
+}
+
+.container-products table td:last-child {
+    border-radius: 0 5px 5px 0;
+}
+
+.container-products tr {
     text-align: center;
-    margin: 0 10px;
 }
 
-.product-div-products h1, p, button {
-    padding: 5px 10px;
+#current-products {
+    width: 100%;
+    position: absolute;
+    top: 100px;
+    text-align: center;
+}
+
+.name-products {
+    background-color: #D58558 !important;
+    color: white !important;
+}
+
+.description {
+    font-size: 13px;
+    max-width: 50px;
+    background-color: #E1BCAC;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
 }

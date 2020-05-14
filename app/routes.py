@@ -15,6 +15,76 @@ def products():
 	product = Products.query.all()
 	return render_template('products.html', title="Products", products=product)
 
+@app.route('/products/customize/Website')
+def website():
+	return '''
+	<html>
+		<head>
+			<title>FOXTAIL | ERROR</title>
+		</title>
+		<body>
+			<center>
+				<h1 style="color: #ff0000">404</h1>
+				<p>File not Found</p>
+				<a href="/">Go Back</a>
+			<center>
+		</body>
+	</html>
+	'''
+
+@app.route('/products/customize/Basic Desktop App')
+def basic_desktop_app():
+	return '''
+	<html>
+		<head>
+			<title>FOXTAIL | ERROR</title>
+		</title>
+		<body>
+			<center>
+				<h1 style="color: #ff0000">404</h1>
+				<p>File not Found</p>
+				<a href="/">Go Back</a>
+			<center>
+		</body>
+	</html>
+	'''
+
+@app.route('/products/customize/Complex Desktop App')
+def complex_desktop_app():
+	return '''
+	<html>
+		<head>
+			<title>FOXTAIL | ERROR</title>
+		</title>
+		<body>
+			<center>
+				<h1 style="color: #ff0000">404</h1>
+				<p>File not Found</p>
+				<a href="/">Go Back</a>
+			<center>
+		</body>
+	</html>
+	'''
+
+@app.route('/products/customize/Concept Design')
+def Concept_Design():
+	return '''
+	<html>
+		<head>
+			<title>FOXTAIL | ERROR</title>
+		</title>
+		<body>
+			<center>
+				<h1 style="color: #ff0000">404</h1>
+				<p>File not Found</p>
+				<a href="/">Go Back</a>
+			<center>
+		</body>
+	</html>
+	'''
+
+
+
 @app.route('/account/login', methods=['GET', 'POST'])
 def login():
 	if current_user.is_authenticated:
@@ -51,7 +121,7 @@ def register():
 		db.session.add(user)
 		db.session.commit()
 		flash(f"Welcome, {form.username.data}! You've been registered!")
-		return redirect('/')
+		return redirect('/account/login')
 	return render_template('signup.html', title="sign up", form=form)
 
 @app.route('/account/<username>')
