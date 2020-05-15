@@ -617,6 +617,7 @@
     color: white;
     padding: 9px 12px;
     border-radius: 100px;
+    transform: translateX(0px);
     transition: transform 0.7s;
     text-decoration: none;
 }

@@ -1,6 +1,7 @@
 from app import db, login
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 class User(UserMixin, db.Model):
 	id=db.Column(db.Integer, primary_key=True)
@@ -29,3 +30,14 @@ class Products(db.Model):
 
 	def __repr__(self):
 		return f'<Product {self.name}>'
+
+class Orders(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	order_name = db.Column(db.String(64), index=True)
+	order_desc = db.Column(db.String(128), index=True, unique=True)
+	time_ordered = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+	order_flag = db.Column(db.String(32)m index=True)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+	def __repr__(self):
+		return f'<Post {self.order_name}'
