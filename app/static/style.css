@@ -482,10 +482,7 @@
 
 /*account display*/
 
-.username-display-account {
-    position: absolute;
-    top: 50px;
-}
+
 
 /*About the Developers*/
 
@@ -654,7 +651,7 @@
 
 .description {
     font-size: 13px;
-    max-width: 50px;
+    max-width: 100px;
     background-color: #E1BCAC;
     border-right: 1px solid black;
     border-left: 1px solid black;
