@@ -1,5 +1,85 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block content %}
-	<h1 class="username-display-account">User: {{ user.username }}</h1>
-	<hr>
+	<div class="info-user-profile">
+		<img src="../static/wyatt_1.jpg" alt="profile picture" />
+		<span>
+			<h1>{{ current_user.username }}</h1>
+			<a href="mailto:{{ current_user.email }}">Email: {{ current_user.email }}</a>
+		</span>
+	</div>
+
+	<div class="content-user-profile">
+		<div class="tags-user-profile">
+			<button class="tablinks-user-profile" onclick="openOrders(event, 'orders')">Orders</button>
+			<button class="tablinks-user-profile" onclick="openOrders(event, 'cancellations')">Cancellations</button>
+		</div>
+	</div>
+	<div id="orders" class="tab-content-user-profile">
+		{% for open in opens %}
+			<div class="border">
+				<h3>{{ open.order_name }}</h3>
+				<p>{{ open.order_desc }}</p>
+				<i>{{ open.time_ordered }}</i>
+				<span>
+					<button class="buttononclick-user-profile" onclick="cancelButton()">Cancel</button>
+				</span>
+			</div>
+		{% endfor %}
+	</div>
+	<div id="cancellations" class="tab-content-user-profile">
+		{% for cancel in cancels %}
+			<div class="border">
+				<h3>{{ cancel.order_name }}</h3>
+				<p>{{ cancel.order_desc }}</p>
+				<i>{{ cancel.time_ordered }}</i>
+			</div>
+		{% endfor %}
+	</div>
+	
+	<div id="cancel-div">
+		<h1>Are you sure you want to cancel?</h1>
+		<p>This action cannot be undone.</p>
+		<form action="" method="POST" novalidate>
+			{{ form.hidden_tag() }}
+			{{ form.confirm.label(class_="confirm-label-user-profile") }}
+			{{ form.confirm(size=20, class_="confirm-user-profile") }}
+			{% for error in form.confirm.errors %}
+				<span style="color: red;">[{{ error }}]</span>
+			{% endfor %}
+			<div class="buttondiv">
+				<button onclick="hide()">Close</button>
+				{{ form.submit(class_="submit-user-profile") }}
+			</div>
+		</form>
+	</div>
+
+	<script>
+		function openOrders(evt, tab) {
+			var i, tabcontent, tablinks;
+
+			tabcontent = document.getElementsByClassName('tab-content-user-profile');
+			for (i=0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+
+			tablinks = document.getElementsByClassName('tablinks-user-profile');
+			for (i=0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
+			}
+
+			document.getElementById(tab).style.display = "flex";
+			evt.currentTarget.className += " active";
+		}
+
+		function cancelButton() {
+			cancel_div = document.getElementById("cancel-div");
+
+			cancel_div.style.display = "block";
+		}
+		function hide() {
+			cancel_div = document.getElementById("cancel-div");
+
+			cancel_div.style.display = "none";
+		}
+	</script>
 {% endblock %}

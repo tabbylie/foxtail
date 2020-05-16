@@ -25,3 +25,7 @@ class SignUpForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
+
+class CancelForm(FlaskForm):
+    confirm = StringField('Confirm Order Name', validators=[DataRequired()])
+    submit = SubmitField('Cancel it')

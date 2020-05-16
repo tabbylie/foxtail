@@ -35,9 +35,9 @@ class Orders(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	order_name = db.Column(db.String(64), index=True)
 	order_desc = db.Column(db.String(128), index=True, unique=True)
-	time_ordered = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-	order_flag = db.Column(db.String(32), index=True)
+	time_ordered = db.Column(db.String(32), index=True, default=datetime.utcnow().strftime("%b, %a %d, %Y %I:%M%p"))
+	order_flag = db.Column(db.String(32), index=True, default='open')
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 	def __repr__(self):
-		return f'<Post {self.order_name}'
+		return f'<Order {self.order_name}>'

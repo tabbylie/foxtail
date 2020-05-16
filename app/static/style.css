@@ -19,6 +19,10 @@
     background-color: white;
 }
 
+#header a {
+    padding-left: 5px;
+}
+
 #header-links-accounts {
     position: absolute;
     display: inline-block;
@@ -482,7 +486,167 @@
 
 /*account display*/
 
+.info-user-profile {
+    position: absolute;
+    top: 55px;
+    width: 100%;
+    background: linear-gradient(to bottom,#E1BCAC, #ffffff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: none;
+}
 
+.info-user-profile img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    padding: 5px 0;
+    transition: 0.5s;
+}
+
+.info-user-profile img:hover {
+    border-radius: 30px;
+}
+
+.info-user-profile span {
+    display: flex;
+    justify-content: center;
+    flex-flow: column wrap;
+    padding-left: 1.5em;
+}
+
+.info-user-profile span h1 {
+    padding-bottom: 10px;
+}
+
+.info-user-profile span a {
+    text-decoration: none;
+}
+
+.content-user-profile {
+    position: relative;
+    top: 320px;
+    left: 40%;
+    margin: 0 auto;
+}
+
+.tablinks-user-profile {
+    background-color: #f1f1f1;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.tablinks-user-profile:hover {
+    background-color: #D58558;
+}
+
+.tablinks-user-profile.active {
+    background-color: #692705;
+    color: white;
+}
+
+.border {
+    position: relative;
+    background-color: #E5C7BC;
+    padding: 6px 12px;
+    margin-bottom: 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.border:last-child {
+    margin-bottom: 0;
+}
+
+.tab-content-user-profile {
+    display: none;
+    flex-flow: row wrap;
+    position: absolute;
+    top: 380px;
+    left: 1.5vw;
+    background-color: #f1f1f1;
+    width: 95%;
+    border-radius: 5px;
+    padding: 6px 12px;
+}
+
+.tab-content-user-profile span {
+    position: relative;
+    left: 950px;
+    bottom: 22px;
+}
+
+.buttononclick-user-profile {
+    padding: 10px 14px;
+    background-color: #D58558;
+    border-radius: 100px;
+    transition: 0.5s;
+}
+
+.buttononclick-user-profile:hover {
+    transform: translateX(8px);
+}
+
+#cancel-div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 5px;
+    display: none;
+    background-color: #D59A7A;
+    z-index: 1;
+    max-width: 250px;
+    padding: 8px 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+#cancel-div h1 {
+    font-size: 20px;
+    padding-bottom: 8px;
+}
+
+#cancel-div p {
+    padding-bottom: 5px;
+}
+
+.buttondiv button {
+    background-color: #D58558;
+    border: 0;
+    padding: 6px 10px;
+    border-radius: 100px;
+    transition: 0.3s;
+}
+
+.buttondiv {
+    position: relative;
+    margin: 0 auto;
+    top: 3px;
+    left: 40px;
+}
+
+.buttondiv button:hover {
+    transform: translateX(-8px);
+}
+
+.submit-user-profile {
+    background-color: #FF5700;
+    color: white;
+    border: 0;
+    padding: 6px 10px;
+    border-radius: 100px;
+    transition: 0.3s;
+}
+
+.submit-user-profile:hover {
+    transform: translateX(8px);
+}
 
 /*About the Developers*/
 

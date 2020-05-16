@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, request
 from app import app, db
-from app.forms import LoginForm, SignUpForm
-from app.models import User, Products
+from app.forms import LoginForm, SignUpForm, CancelForm
+from app.models import User, Products, Orders
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
@@ -124,11 +124,20 @@ def register():
 		return redirect('/account/login')
 	return render_template('signup.html', title="sign up", form=form)
 
-@app.route('/account/<username>')
+@app.route('/account/<username>', methods=['GET', 'POST'])
 @login_required
 def user(username):
 	user = User.query.filter_by(username=username).first_or_404()
-	return render_template('user.html', user=user)
+	form = CancelForm()
+	if form.validate_on_submit():
+		order = Orders.query.filter_by(order_name=form.confirm.data).first_or_404()
+		order.order_flag = 'cancelled'
+		db.session.add(order)
+		db.session.commit()
+	ordered = Orders.query.filter_by(order_flag='open').all()
+	cancels = Orders.query.filter_by(order_flag='cancelled').all()
+
+	return render_template('user.html', user=user, opens=ordered, cancels=cancels, form=form)
 
 @app.route('/termsofservice')
 def terms_of_service():
