@@ -17,9 +17,9 @@
 	<div id="orders" class="tab-content-user-profile">
 		{% for open in opens %}
 			<div class="border">
-				<h3>{{ open.order_name }}</h3>
-				<p>{{ open.order_desc }}</p>
-				<i>{{ open.time_ordered }}</i>
+				<h3>{{ open.author.order_name }}</h3>
+				<p>{{ open.author.order_desc }}</p>
+				<i>{{ open.author.time_ordered }}</i>
 				<span>
 					<button class="buttononclick-user-profile" onclick="cancelButton()">Cancel</button>
 				</span>
@@ -29,9 +29,9 @@
 	<div id="cancellations" class="tab-content-user-profile">
 		{% for cancel in cancels %}
 			<div class="border">
-				<h3>{{ cancel.order_name }}</h3>
-				<p>{{ cancel.order_desc }}</p>
-				<i>{{ cancel.time_ordered }}</i>
+				<h3>{{ cancel.author.order_name }}</h3>
+				<p>{{ cancel.author.order_desc }}</p>
+				<i>{{ cancel.author.time_ordered }}</i>
 			</div>
 		{% endfor %}
 	</div>

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 from app.models import User
 
@@ -29,3 +29,31 @@ class SignUpForm(FlaskForm):
 class CancelForm(FlaskForm):
     confirm = StringField('Confirm Order Name', validators=[DataRequired()])
     submit = SubmitField('Cancel it')
+
+class BasicAppForm(FlaskForm):
+    order_name = StringField('Name of Application*', validators=[DataRequired()])
+    order_description = StringField('Describe your application*', validators=[DataRequired()])
+    order_examps = StringField('Example Applications (if any)')
+    submit = SubmitField('Submit your order')
+
+class ComplexAppForm(FlaskForm):
+    order_name = StringField('Name of Application*', validators=[DataRequired()])
+    order_description = StringField('Describe your Application*', validators=[DataRequired()])
+    order_examps = StringField('Example applications (if any)')
+    submit = SubmitField('Submit your order')
+
+class FrontEndForm(FlaskForm):
+    order_name = StringField("Order Name*", validators=[DataRequired()])
+    order_description = StringField('Describe the purpose*', validators=[DataRequired()])
+    design_or_no = SelectField('Have a Design?', choices=['Yes', 'No'])
+    submit = SubmitField('Submit your order')
+
+class DatabaseForm(FlaskForm):
+    order_name = StringField('Order name*', validators=[DataRequired()])
+    order_description = StringField('Describe its use*', validators=[DataRequired()])
+    submit = SubmitField('Submit your order')
+
+class CMSForm(FlaskForm):
+    order_name = StringField('Order name*', validators=[DataRequired()])
+    order_description = StringField('Describe its purpose*', validators=[DataRequired()])
+    Submit = SubmitField('Submit your order')

@@ -1,9 +1,10 @@
 from flask import render_template, flash, redirect, request
 from app import app, db
-from app.forms import LoginForm, SignUpForm, CancelForm
+from app.forms import LoginForm, SignUpForm, CancelForm, BasicAppForm, ComplexAppForm, FrontEndForm, DatabaseForm, CMSForm
 from app.models import User, Products, Orders
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
+from time import sleep
 
 @app.route('/')
 @app.route('/index')
@@ -15,58 +16,37 @@ def products():
 	product = Products.query.all()
 	return render_template('products.html', title="Products", products=product)
 
-@app.route('/products/customize/Website')
-def website():
-	return '''
-	<html>
-		<head>
-			<title>FOXTAIL | ERROR</title>
-		</title>
-		<body>
-			<center>
-				<h1 style="color: #ff0000">404</h1>
-				<p>File not Found</p>
-				<a href="/">Go Back</a>
-			<center>
-		</body>
-	</html>
-	'''
+@app.route('/products/customize/Front End', methods=['GET', 'POST'])
+def front_end():
+	form = FrontEndForm()
+	if form.validate_on_submit():
+		order = Order(order_name=form.order_name.data, order_desc=form.order_description.data)
+		db.session.add(order)
+		db.session.commit()
+		redirect('/success')
+	return render_template('frontend.html', title='Front End', form=form)
 
-@app.route('/products/customize/Basic Desktop App')
+@app.route('/products/customize/Basic Desktop App', methods=['GET', 'POST'])
 def basic_desktop_app():
-	return '''
-	<html>
-		<head>
-			<title>FOXTAIL | ERROR</title>
-		</title>
-		<body>
-			<center>
-				<h1 style="color: #ff0000">404</h1>
-				<p>File not Found</p>
-				<a href="/">Go Back</a>
-			<center>
-		</body>
-	</html>
-	'''
+	form = BasicAppForm()
+	if form.validate_on_submit():
+		order = Order(order_name=form.order_name.data, order_desc=form.order_description.data)
+		db.session.add(order)
+		db.session.commit()
+		redirect('/success')
+	return render_template('basicapp.html', title='Basic App', form=form)
 
-@app.route('/products/customize/Complex Desktop App')
+@app.route('/products/customize/Complex Desktop App', methods=['GET', 'POST'])
 def complex_desktop_app():
-	return '''
-	<html>
-		<head>
-			<title>FOXTAIL | ERROR</title>
-		</title>
-		<body>
-			<center>
-				<h1 style="color: #ff0000">404</h1>
-				<p>File not Found</p>
-				<a href="/">Go Back</a>
-			<center>
-		</body>
-	</html>
-	'''
+	form = ComplexAppForm()
+	if form.validate_on_submit():
+		order = Order(order_name=form.order_name.data, order_desc=form.order_description.data)
+		db.session.add(order)
+		db.session.commit()
+		redirect('/success')
+	return render_template('complexapp.html', title='Complex App', form=form)
 
-@app.route('/products/customize/Concept Design')
+@app.route('/products/customize/Concept Design', methods=['GET', 'POST'])
 def Concept_Design():
 	return '''
 	<html>
@@ -83,8 +63,41 @@ def Concept_Design():
 	</html>
 	'''
 
+@app.route('/products/customize/Database', methods=['GET', 'POST'])
+def database():
+	form = DatabaseForm()
+	if form.validate_on_submit():
+		order = Order(order_name=form.order_name.data, order_desc=form.order_description.data)
+		db.session.add(order)
+		db.session.commit()
+		redirect('/success')
+	return render_template('database.html', title='Database', form=form)
+
+@app.route('/products/customize/Content Management systems', methods=['GET', 'POST'])
+def CMS():
+	form = CMSForm()
+	if form.validate_on_submit():
+		order = Order(order_name=form.order_name.data, order_desc=form.order_description.data)
+		db.session.add(order)
+		db.session.commit()
+		redirect('/success')
+	return render_template('cms.html', title='CMS', form=form)
 
 
+@app.route('/success')
+def success():
+	return '''
+	<html>
+		<head>
+			<title>FOXTAIL | Success</title>
+		</title>
+		<body>
+			<h1 style="position: absolute; margin: 0 auto;>Your order has been placed!</h1>
+			<p>Redirecting... (or click <a href="/">here</a>)</p>
+			{{ redirect('/') }}
+		</body>
+	</html>
+	'''
 @app.route('/account/login', methods=['GET', 'POST'])
 def login():
 	if current_user.is_authenticated:
