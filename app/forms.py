@@ -34,26 +34,26 @@ class BasicAppForm(FlaskForm):
     order_name = StringField('Name of Application*', validators=[DataRequired()])
     order_description = StringField('Describe your application*', validators=[DataRequired()])
     order_examps = StringField('Example Applications (if any)')
-    submit = SubmitField('Submit your order')
+    submit = SubmitField('Submit order')
 
 class ComplexAppForm(FlaskForm):
     order_name = StringField('Name of Application*', validators=[DataRequired()])
     order_description = StringField('Describe your Application*', validators=[DataRequired()])
     order_examps = StringField('Example applications (if any)')
-    submit = SubmitField('Submit your order')
+    submit = SubmitField('Submit order')
 
 class FrontEndForm(FlaskForm):
     order_name = StringField("Order Name*", validators=[DataRequired()])
     order_description = StringField('Describe the purpose*', validators=[DataRequired()])
-    design_or_no = SelectField('Have a Design?', choices=['Yes', 'No'])
-    submit = SubmitField('Submit your order')
+    design_or_no = SelectField(u'Have a Design?*', choices=[('1', 'Yes'), ('2', 'No')])
+    submit = SubmitField('Submit order')
 
 class DatabaseForm(FlaskForm):
     order_name = StringField('Order name*', validators=[DataRequired()])
     order_description = StringField('Describe its use*', validators=[DataRequired()])
-    submit = SubmitField('Submit your order')
+    submit = SubmitField('Submit order')
 
 class CMSForm(FlaskForm):
     order_name = StringField('Order name*', validators=[DataRequired()])
     order_description = StringField('Describe its purpose*', validators=[DataRequired()])
-    Submit = SubmitField('Submit your order')
+    Submit = SubmitField('Submit order')

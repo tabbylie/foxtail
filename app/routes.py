@@ -4,7 +4,6 @@ from app.forms import LoginForm, SignUpForm, CancelForm, BasicAppForm, ComplexAp
 from app.models import User, Products, Orders
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
-from time import sleep
 
 @app.route('/')
 @app.route('/index')
@@ -16,17 +15,23 @@ def products():
 	product = Products.query.all()
 	return render_template('products.html', title="Products", products=product)
 
-@app.route('/products/customize/Front End', methods=['GET', 'POST'])
+@app.route('/customize/Front End', methods=['GET', 'POST'])
+@login_required
 def front_end():
-	form = FrontEndForm()
-	if form.validate_on_submit():
-		order = Order(order_name=form.order_name.data, order_desc=form.order_description.data)
+	form = FrontEndForm(request.form)
+	print(f'{form.validate_on_submit()}')
+	if request.method == 'POST' and form.validate():
+		user = User.query.filter_by(username=current_user.username).first_or_404()
+		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data, author=user)
+		print('yes')
 		db.session.add(order)
 		db.session.commit()
-		redirect('/success')
+		print('commited')
+		return redirect('/success')
 	return render_template('frontend.html', title='Front End', form=form)
 
-@app.route('/products/customize/Basic Desktop App', methods=['GET', 'POST'])
+@app.route('/customize/Basic Desktop App', methods=['GET', 'POST'])
+@login_required
 def basic_desktop_app():
 	form = BasicAppForm()
 	if form.validate_on_submit():
@@ -36,7 +41,8 @@ def basic_desktop_app():
 		redirect('/success')
 	return render_template('basicapp.html', title='Basic App', form=form)
 
-@app.route('/products/customize/Complex Desktop App', methods=['GET', 'POST'])
+@app.route('/customize/Complex Desktop App', methods=['GET', 'POST'])
+@login_required
 def complex_desktop_app():
 	form = ComplexAppForm()
 	if form.validate_on_submit():
@@ -46,7 +52,8 @@ def complex_desktop_app():
 		redirect('/success')
 	return render_template('complexapp.html', title='Complex App', form=form)
 
-@app.route('/products/customize/Concept Design', methods=['GET', 'POST'])
+@app.route('/customize/Concept Design', methods=['GET', 'POST'])
+@login_required
 def Concept_Design():
 	return '''
 	<html>
@@ -63,7 +70,8 @@ def Concept_Design():
 	</html>
 	'''
 
-@app.route('/products/customize/Database', methods=['GET', 'POST'])
+@app.route('/customize/Database', methods=['GET', 'POST'])
+@login_required
 def database():
 	form = DatabaseForm()
 	if form.validate_on_submit():
@@ -73,7 +81,8 @@ def database():
 		redirect('/success')
 	return render_template('database.html', title='Database', form=form)
 
-@app.route('/products/customize/Content Management systems', methods=['GET', 'POST'])
+@app.route('/customize/Content Management systems', methods=['GET', 'POST'])
+@login_required
 def CMS():
 	form = CMSForm()
 	if form.validate_on_submit():
@@ -92,12 +101,11 @@ def success():
 			<title>FOXTAIL | Success</title>
 		</title>
 		<body>
-			<h1 style="position: absolute; margin: 0 auto;>Your order has been placed!</h1>
-			<p>Redirecting... (or click <a href="/">here</a>)</p>
-			{{ redirect('/') }}
+			<h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">Your order has been placed!<br>Click <a href="/">here</a> to go to homepage</h1>
 		</body>
 	</html>
 	'''
+
 @app.route('/account/login', methods=['GET', 'POST'])
 def login():
 	if current_user.is_authenticated:
@@ -143,12 +151,12 @@ def user(username):
 	user = User.query.filter_by(username=username).first_or_404()
 	form = CancelForm()
 	if form.validate_on_submit():
-		order = Orders.query.filter_by(order_name=form.confirm.data).first_or_404()
+		order = user.orders.filter_by(order_name=form.confirm.data).first_or_404()
 		order.order_flag = 'cancelled'
 		db.session.add(order)
 		db.session.commit()
-	ordered = Orders.query.filter_by(order_flag='open').all()
-	cancels = Orders.query.filter_by(order_flag='cancelled').all()
+	ordered = user.orders.filter_by(order_flag='open')
+	cancels = user.orders.filter_by(order_flag='cancelled')
 
 	return render_template('user.html', user=user, opens=ordered, cancels=cancels, form=form)
 

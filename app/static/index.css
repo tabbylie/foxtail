@@ -144,6 +144,10 @@
     background-color: #CF8B64;
 }
 
+#text {
+    display: none;
+}
+
 .spacer {
     position: absolute;
     width: 100%;

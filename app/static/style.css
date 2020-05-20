@@ -6,8 +6,6 @@
     margin: 0;
 }
 
-
-
 /*Color Scheme https://coolors.co/ff5700-692705-9c5935-cf8b64-d59a7a-ddb19b-e5c7bc-ffffff*/
 
 #header {
@@ -823,3 +821,69 @@
 }
 
 /* Customization styling */
+
+#container-frontend {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 15px 10px;
+    display: flex;
+    justify-content: center;
+    max-width: 200px;
+}
+
+.name-div-frontend {
+    padding-bottom: 10px;
+}
+
+.desc-div-frontend {
+    padding-bottom: 10px;
+}
+
+.design-div-frontend {
+    padding-bottom: 10px;
+}
+
+.order-name-frontend {
+    border: 1px solid black;
+    margin: 5px 0;
+    padding: 3px 5px;
+    border-radius: 5px;
+}
+
+.order-desc-frontend {
+    border: 1px solid black;
+    margin: 5px 0;
+    padding: 3px 5px;
+    border-radius: 5px;
+}
+
+.order-design-frontend {
+    border: 1px solid #692705;
+    border-radius: 100px;
+    padding: 1px 5px;
+    transition: 0.3s;
+}
+
+.order-design-frontend:hover {
+    background-color: #D58558;
+    color: white;
+}
+
+.order-submit-frontend {
+    position: relative;
+    left: 30px;
+    background-color: #FF5700;
+    color: white;
+    border-radius: 100px;
+    padding: 5px 10px;
+    transition: 0.7s;
+}
+
+.order-submit-frontend:hover {
+    background-color: #D58558;
+    padding: 10px 15px;
+}

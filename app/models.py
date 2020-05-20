@@ -8,7 +8,7 @@ class User(UserMixin, db.Model):
 	username = db.Column(db.String(64), index=True, unique=True)
 	email = db.Column(db.String(120), index=True, unique=True)
 	password_hash = db.Column(db.String(128))
-	orders = db.relationship('Products', backref='author', lazy='dynamic')
+	orders = db.relationship('Orders', backref='author', lazy='dynamic')
 
 	def set_password(self, password):
 		self.password_hash = generate_password_hash(password)
@@ -35,7 +35,7 @@ class Products(db.Model):
 class Orders(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	order_name = db.Column(db.String(64), index=True)
-	order_desc = db.Column(db.String(128), index=True, unique=True)
+	order_desc = db.Column(db.String(128), index=True)
 	time_ordered = db.Column(db.String(32), index=True, default=datetime.utcnow().strftime("%b, %a %d, %Y %I:%M%p"))
 	order_flag = db.Column(db.String(32), index=True, default='open')
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
