@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
+from flask_wtf.file import FileAllowed
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, MultipleFileField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 from app.models import User
 
@@ -56,4 +57,10 @@ class DatabaseForm(FlaskForm):
 class CMSForm(FlaskForm):
     order_name = StringField('Order name*', validators=[DataRequired()])
     order_description = StringField('Describe its purpose*', validators=[DataRequired()])
-    Submit = SubmitField('Submit order')
+    submit = SubmitField('Submit order')
+
+class CDForm(FlaskForm):
+    order_name = StringField('Order Name*', validators=[DataRequired()])
+    order_description = StringField('Describe your design*', validators=[DataRequired()])
+    order_reference = MultipleFileField('Any References?', validators=[FileAllowed(['jpg', 'png'], 'Images only!')])
+    submit = SubmitField('Submit Order')

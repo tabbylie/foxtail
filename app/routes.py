@@ -1,14 +1,18 @@
 from flask import render_template, flash, redirect, request
 from app import app, db
-from app.forms import LoginForm, SignUpForm, CancelForm, BasicAppForm, ComplexAppForm, FrontEndForm, DatabaseForm, CMSForm
+from app.forms import LoginForm, SignUpForm, CancelForm, BasicAppForm, ComplexAppForm, FrontEndForm, DatabaseForm, CMSForm, CDForm
 from app.models import User, Products, Orders
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
+import os
 
 @app.route('/')
 @app.route('/index')
 def index():
-	return render_template('index.html', title="Home")
+	basic_app = Products.query.filter_by(name="Basic Desktop App").first()
+	front_end = Products.query.filter_by(name="Front End").first()
+	database = Products.query.filter_by(name="Database ").first()
+	return render_template('index.html', title="Home", products=[basic_app, front_end, database])
 
 @app.route('/products')
 def products():
@@ -23,10 +27,8 @@ def front_end():
 	if request.method == 'POST' and form.validate():
 		user = User.query.filter_by(username=current_user.username).first_or_404()
 		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data, author=user)
-		print('yes')
 		db.session.add(order)
 		db.session.commit()
-		print('commited')
 		return redirect('/success')
 	return render_template('frontend.html', title='Front End', form=form)
 
@@ -35,10 +37,10 @@ def front_end():
 def basic_desktop_app():
 	form = BasicAppForm()
 	if form.validate_on_submit():
-		order = Order(order_name=form.order_name.data, order_desc=form.order_description.data)
+		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data)
 		db.session.add(order)
 		db.session.commit()
-		redirect('/success')
+		return redirect('/success')
 	return render_template('basicapp.html', title='Basic App', form=form)
 
 @app.route('/customize/Complex Desktop App', methods=['GET', 'POST'])
@@ -46,39 +48,33 @@ def basic_desktop_app():
 def complex_desktop_app():
 	form = ComplexAppForm()
 	if form.validate_on_submit():
-		order = Order(order_name=form.order_name.data, order_desc=form.order_description.data)
+		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data)
 		db.session.add(order)
 		db.session.commit()
-		redirect('/success')
+		return redirect('/success')
 	return render_template('complexapp.html', title='Complex App', form=form)
 
 @app.route('/customize/Concept Design', methods=['GET', 'POST'])
 @login_required
 def Concept_Design():
-	return '''
-	<html>
-		<head>
-			<title>FOXTAIL | ERROR</title>
-		</title>
-		<body>
-			<center>
-				<h1 style="color: #ff0000">404</h1>
-				<p>File not Found</p>
-				<a href="/">Go Back</a>
-			<center>
-		</body>
-	</html>
-	'''
+	form = CDForm()
+	if form.validate_on_submit():
+		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data)
+		db.session.add(order)
+		db.session.commit()
+		files = request.files.getlist(form.order_reference.name)
+		return redirect('/success')
+	return render_template('concept.html', title="Concept Design", form=form)
 
 @app.route('/customize/Database', methods=['GET', 'POST'])
 @login_required
 def database():
 	form = DatabaseForm()
 	if form.validate_on_submit():
-		order = Order(order_name=form.order_name.data, order_desc=form.order_description.data)
+		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data)
 		db.session.add(order)
 		db.session.commit()
-		redirect('/success')
+		return redirect('/success')
 	return render_template('database.html', title='Database', form=form)
 
 @app.route('/customize/Content Management systems', methods=['GET', 'POST'])
@@ -86,7 +82,7 @@ def database():
 def CMS():
 	form = CMSForm()
 	if form.validate_on_submit():
-		order = Order(order_name=form.order_name.data, order_desc=form.order_description.data)
+		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data)
 		db.session.add(order)
 		db.session.commit()
 		redirect('/success')
@@ -157,8 +153,9 @@ def user(username):
 		db.session.commit()
 	ordered = user.orders.filter_by(order_flag='open')
 	cancels = user.orders.filter_by(order_flag='cancelled')
+	completed = user.orders.filter_by(order_flag='completed')
 
-	return render_template('user.html', user=user, opens=ordered, cancels=cancels, form=form)
+	return render_template('user.html', user=user, opens=ordered, cancels=cancels, completed=completed, form=form)
 
 @app.route('/termsofservice')
 def terms_of_service():

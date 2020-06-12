@@ -9,14 +9,14 @@
         <meta charset="utf-8">
         <meta name="viewport", value="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <link rel="icon" type="image/png" href="../static/logo-1-removebg-preview.png">
+        <link rel="icon" type="image/png" href="../static/logo-1.png">
         <link rel="stylesheet" type="text/css" href="../static/index.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     </head>
     <body>
         <div id="header">
             <button class="menu-icon" style="display: none;"><input id="menu-icon" style="display: none;" type="image" name="style" src="https://image.flaticon.com/icons/svg/149/149176.svg" width="50" onclick="trans()" /></button>
-            <a href="/" style="text-decoration: none;"><input id="favicon" type="image" name="logo" src="../static/logo-1-removebg-preview.png" width=100 height=50/></button></a>
+            <a href="/" style="text-decoration: none;"><input id="favicon" type="image" name="logo" src="../static/logo-1.png" width=100 height=50/></button></a>
             {% if current_user.is_anonymous %}
                 <div id="header-links-accounts">
                     <span class="links-header">
@@ -48,8 +48,8 @@
                         <div class="dropdown-content-header">
                             <a href="/products">Products</a>
                             <a href="/service">Support</a>
-                            <a href="/termsofservice">Terms of Service</a> -->
-                            <a href="/aboutus">About FOXTAIl</a>
+                            <a href="/termsofservice">Terms of Service</a>
+                            <a href="/aboutus">About FOXTAIL</a>
                             <a href="/about_the_devs">About the Devs</a>
                         </div>
                     </span>
@@ -90,7 +90,7 @@
             <span class="trustworthy">
                 <img class="svg-img" src="../static/index_all.svg" alt="why us image" />
                 <h1>Trustworthy</h1>
-                <p>With amazing speed and top quality applications, we are here to give you amazing applications at an affordable price. Fixing bugs and testing BEFORE we hand over the application, we can only guarantee top quality applications.</p>
+                <p>With amazing speed and top quality applications, we are here to give you amazing applications at an affordable price. Fixing bugs and testing <b>BEFORE</b> we hand over the application, we can only guarantee top quality applications.</p>
             </span>
             <span class="affordable">
                 <img src="../static/index_all.svg" alt="why us image" />
@@ -98,6 +98,41 @@
                 <p>We build applications for an very affordable price, and allow for amazing customability. We are very affordable for small businesses and indivuals alike, for the quality we make!</p>
             </span>
         </div>
+        <div class="product-spacer"></div>
+        <div class="products">
+            <span class="list_of_products">Example Projects</span>
+            <div class="product-items">
+                {% for product in products %}
+                    <div>
+                        <span class="name-items">{{ product.name }}</span>
+                        <span class="desc-items">{{ product.desc }}</span>
+                        <span class="price-items">${{ product.price }}/hr</span>
+                        <span class="goto"><a href="/customize/{{ product.name }}">Customize</a></span>
+                    </div>
+                {% endfor %}
+                <span class="more-products"><a href="/products">More</a></span>
+            </div>
+        </div>
+        <footer id="footer">
+            <p><img src="../static/logo-1.png" alt="Logo Image"></p>
+            <div class="nav-links-footer">
+                <h1>Nav links</h1>
+                <a href="/">Home</a>
+                <a href="/products">Products</a>
+                <a href="/aboutus">About us</a>
+                <a href="/about_the_devs">About the devs</a>
+            </div>
+            <div class="contact-us">
+                <h1>Contacts</h1>
+                <a href="mailto:officialfoxtail@gmail.com">officialfoxtail@gmail.com</a>
+                <a href="tel:+3173842064">(317)-384-2064</a>
+                <a href="/support">Support</a>
+            </div>
+            <div class="legal-info">
+                <h1>Legal</h1>
+                <a href="/tos">Terms of Service</a>
+            </div>
+        </footer>
         <script type="text/javascript" >
             var onImg = "https://image.flaticon.com/icons/svg/149/149176.svg";
             var offImg = "https://image.flaticon.com/icons/svg/149/149147.svg";

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <div id="container-frontend">
-        <form action="" method="POST" novalidate>
+        <form action="" method="POST" novalidate autocomplete="off">
             {{ form.hidden_tag() }}
             <div class="name-div-frontend">
                 {{ form.order_name.label(class_="order-name-label-frontend") }}

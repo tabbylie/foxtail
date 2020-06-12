@@ -12,6 +12,7 @@
 		<div class="tags-user-profile">
 			<button class="tablinks-user-profile" onclick="openOrders(event, 'orders')">Orders</button>
 			<button class="tablinks-user-profile" onclick="openOrders(event, 'cancellations')">Cancellations</button>
+			<button class="tablinks-user-profile" onclick="openOrders(event, 'completed')">Completed</button>
 		</div>
 	</div>
 	<div id="orders" class="tab-content-user-profile">
@@ -32,6 +33,15 @@
 				<h3>{{ cancel.order_name }}</h3>
 				<p>{{ cancel.order_desc }}</p>
 				<i>{{ cancel.time_ordered }}</i>
+			</div>
+		{% endfor %}
+	</div>
+	<div id="completed" class="tab-content-user-profile">
+		{% for complete in completed %}
+			<div class="border">
+				<h3>{{ complete.order_name }}</h3>
+				<p>{{ complete.order_desc }}</p>
+				<i>{{ complete.time_ordered }}</i>
 			</div>
 		{% endfor %}
 	</div>
