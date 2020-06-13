@@ -181,7 +181,7 @@ def user(username):
 
 @app.route('/support')
 def support():
-
+	pass
 
 @app.route('/about_the_devs')
 def ATD():
