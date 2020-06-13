@@ -159,7 +159,6 @@ def register():
 		user.set_password(form.password.data)
 		db.session.add(user)
 		db.session.commit()
-		flash(f"Welcome, {form.username.data}! You've been registered!")
 		return redirect('/account/login')
 	return render_template('signup.html', title="sign up", form=form)
 
@@ -173,62 +172,16 @@ def user(username):
 		order.order_flag = 'cancelled'
 		db.session.add(order)
 		db.session.commit()
+		send_mail(f"{form.confirm.data} cancelled", current_user.email, ['officialfoxtail@gmail.com', current_user.email], f"{form.confirm.data} has been cancelled")
 	ordered = user.orders.filter_by(order_flag='open')
 	cancels = user.orders.filter_by(order_flag='cancelled')
 	completed = user.orders.filter_by(order_flag='completed')
 
 	return render_template('user.html', user=user, opens=ordered, cancels=cancels, completed=completed, form=form)
 
-@app.route('/termsofservice')
-def terms_of_service():
-	return '''
-	<html>
-		<head>
-			<title>FOXTAIL | ERROR</title>
-		</title>
-		<body>
-			<center>
-				<h1 style="color: #ff0000">404</h1>
-				<p>File not Found</p>
-				<a href="/">Go Back</a>
-			<center>
-		</body>
-	</html>
-	'''
+@app.route('/support')
+def support():
 
-@app.route('/service')
-def service():
-	return '''
-	<html>
-		<head>
-			<title>FOXTAIL | ERROR</title>
-		</title>
-		<body>
-			<center>
-				<h1 style="color: #ff0000">404</h1>
-				<p>File not Found</p>
-				<a href="/">Go Back</a>
-			<center>
-		</body>
-	</html>
-	'''
-
-@app.route('/aboutus')
-def aboutus():
-	return '''
-	<html>
-		<head>
-			<title>FOXTAIL | ERROR</title>
-		</title>
-		<body>
-			<center>
-				<h1 style="color: #ff0000">404</h1>
-				<p>File not Found</p>
-				<a href="/">Go Back</a>
-			<center>
-		</body>
-	</html>
-	'''
 
 @app.route('/about_the_devs')
 def ATD():

@@ -14,4 +14,4 @@ mail = Mail(app)
 login = LoginManager(app)
 login.login_view = '/account/login'
 
-from app import routes, models
+from app import routes, models, errors
