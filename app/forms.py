@@ -46,7 +46,7 @@ class ComplexAppForm(FlaskForm):
 class FrontEndForm(FlaskForm):
     order_name = StringField("Order Name*", validators=[DataRequired()])
     order_description = StringField('Describe the purpose*', validators=[DataRequired()])
-    design_or_no = SelectField(u'Have a Design?*', choices=[('1', 'Yes'), ('2', 'No')])
+    design_or_no = MultipleFileField('Have a design?')
     submit = SubmitField('Submit order')
 
 class DatabaseForm(FlaskForm):

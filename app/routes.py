@@ -2,9 +2,13 @@ from flask import render_template, flash, redirect, request
 from app import app, db
 from app.forms import LoginForm, SignUpForm, CancelForm, BasicAppForm, ComplexAppForm, FrontEndForm, DatabaseForm, CMSForm, CDForm
 from app.models import User, Products, Orders
+from app.email import send_mail
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 import os
+import io
+import numpy as np
+import cv2
 
 @app.route('/')
 @app.route('/index')
@@ -29,6 +33,11 @@ def front_end():
 		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data, author=user)
 		db.session.add(order)
 		db.session.commit()
+		files = request.files.getlist(form.design_or_no.name)
+		attachments = []
+		for file in files:
+			attachments.append(file.stream.read())
+		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com', current_user.email], f"description of project: {form.order_description.data}", None, attachments)
 		return redirect('/success')
 	return render_template('frontend.html', title='Front End', form=form)
 
@@ -37,9 +46,11 @@ def front_end():
 def basic_desktop_app():
 	form = BasicAppForm()
 	if form.validate_on_submit():
-		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data)
+		user = User.query.filter_by(username=current_user.username).first_or_404()
+		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data, author=user)
 		db.session.add(order)
 		db.session.commit()
+		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com', current_user.email], f"Description of project: {form.order_description.data}\nExamples: {form.order_examps.data}")
 		return redirect('/success')
 	return render_template('basicapp.html', title='Basic App', form=form)
 
@@ -48,9 +59,11 @@ def basic_desktop_app():
 def complex_desktop_app():
 	form = ComplexAppForm()
 	if form.validate_on_submit():
-		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data)
+		user = User.query.filter_by(username=current_user.username).first_or_404()
+		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data, author=user)
 		db.session.add(order)
 		db.session.commit()
+		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com', current_user.email], f"Description of project: {form.order_description.data}\nExamples: {form.order_examps.data}")
 		return redirect('/success')
 	return render_template('complexapp.html', title='Complex App', form=form)
 
@@ -59,10 +72,15 @@ def complex_desktop_app():
 def Concept_Design():
 	form = CDForm()
 	if form.validate_on_submit():
-		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data)
+		user = User.query.filter_by(username=current_user.username).first_or_404()
+		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data, author=user)
 		db.session.add(order)
 		db.session.commit()
 		files = request.files.getlist(form.order_reference.name)
+		attachments = []
+		for file in files:
+			attachments.append(file.stream.read())
+		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com', current_user.email], f"Description of project: {form.order_description.data}", None, attachments)
 		return redirect('/success')
 	return render_template('concept.html', title="Concept Design", form=form)
 
@@ -71,9 +89,11 @@ def Concept_Design():
 def database():
 	form = DatabaseForm()
 	if form.validate_on_submit():
-		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data)
+		user = User.query.filter_by(username=current_user.username).first_or_404()
+		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data, author=user)
 		db.session.add(order)
 		db.session.commit()
+		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com', current_user.email], f"description of database: {form.order_description.data}")
 		return redirect('/success')
 	return render_template('database.html', title='Database', form=form)
 
@@ -82,9 +102,11 @@ def database():
 def CMS():
 	form = CMSForm()
 	if form.validate_on_submit():
-		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data)
+		user = User.query.filter_by(username=current_user.username).first_or_404()
+		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data, author=user)
 		db.session.add(order)
 		db.session.commit()
+		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com', current_user.email], f"purpose of CMS: {form.order_description.data}")
 		redirect('/success')
 	return render_template('cms.html', title='CMS', form=form)
 
