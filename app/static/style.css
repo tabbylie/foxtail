@@ -185,8 +185,7 @@
 /* Footer styling */
 
 #footer {
-    position: absolute;
-    top: 1340px;
+    position: relative;
     width: 100%;
     /* height: 30vh; */
     background-color: #E5C7BC;
@@ -377,10 +376,16 @@
 
 /* Sign in styles */
 
+#container-login {
+    width: 100%;
+    height: 99vh;
+}
+
 #sign-in-div {
     position: absolute;
-    right: 33%;
-    top: 25%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border: 2px solid black;
     border-radius: 10px;
     width: 500px;
@@ -779,10 +784,8 @@
 /* Products css */
 
 .container-products {
-    position: relative;
-    top: 200px;
-    width: 100%;
-    height: 608px;
+    margin-top: 55px;
+    text-align: center;
 }
 
 .container-products table {
@@ -847,12 +850,6 @@
     text-align: center;
 }
 
-#current-products {
-    width: 100%;
-    position: absolute;
-    top: 100px;
-    text-align: center;
-}
 
 .name-products {
     background-color: #D58558 !important;
@@ -1078,7 +1075,6 @@
     transition: all 0.3s ease-in;
 }
 
-
 .order-submit-cd {
     position: relative;
     left: 50%;
@@ -1093,4 +1089,149 @@
 .order-submit-cd:hover {
     background-color: #D58558;
     padding: 10px 15px;
+}
+
+/* support styling */
+
+#container-support {
+    margin-top: 55px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#top-support {
+    position: relative;
+    width: 100%;
+    height: 40%;
+    background-image: linear-gradient(to right, #ff5700, #ffffff, #ff5700);
+    margin: 0 auto;
+}
+#top-support h1, #top-support p{
+    color: #FF5700;
+}
+
+#issue-support {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 100%;
+    background-color: white;
+    text-align: center;
+}
+
+#issue-support h1, p {
+    padding-top: 10px;
+}
+
+#button-support {
+    margin-top: 60px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    position: relative;
+    background-color: #FF5700;
+    color: white;
+    transform: translateY(-50%);
+    transition: all 0.3s ease-in;
+}
+
+#button-support:hover {
+    padding: 15px 20px;
+    background-color: #CF8B64;
+    color: black;
+    font-size: 16px;
+}
+
+#support-form {
+    width: 13em;
+    height: 10em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #D59A7A;
+    border-radius: 5px;
+    text-align: center;
+    display: none;
+}
+
+#container-support-form {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 10px;
+}
+
+.issue-label-support {
+    margin: 10px;
+}
+
+.issue-support {
+    margin-bottom: 10px;
+    width: 50px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #692705;
+    transition: all 0.2s ease;
+}
+
+.issue-support:focus {
+    border: 1px solid #FF5700;
+    width: 88%;
+}
+
+.submit-support {
+    margin-top: 20px;
+    padding: 5px 10px;
+    background-color: #FF5700;
+    color: white;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.submit-support:hover {
+    transform: translateX(5%);
+}
+
+#cancel-support {
+    padding: 5px 10px;
+    color: white;
+    background-color: #692705;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+#cancel-support:hover {
+    transform: translateX(-10%);   
+}
+
+#spacer-support {
+    position: relative;
+    width: 90%;
+    height: 2px;
+    background-color: black;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+#faq-support {
+    display: flex;
+    justify-content: center;
+    flex-flow: column wrap;
+    max-width: 500px;
+    background-color: #ffffff;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* #faq-support h1, #faq-support p {
+    color: #ff5700;
+} */
+
+#faq-support div {
+    display: flex;
+    justify-content: center;
+    flex-flow: column wrap;
+    margin-top: 10px;
 }

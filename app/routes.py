@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, request
 from app import app, db
-from app.forms import LoginForm, SignUpForm, CancelForm, BasicAppForm, ComplexAppForm, FrontEndForm, DatabaseForm, CMSForm, CDForm
+from app.forms import LoginForm, SignUpForm, CancelForm, BasicAppForm, ComplexAppForm, FrontEndForm, DatabaseForm, CMSForm, CDForm, SupportForm
 from app.models import User, Products, Orders
 from app.email import send_mail
 from flask_login import current_user, login_user, logout_user, login_required
@@ -37,7 +37,7 @@ def front_end():
 		attachments = []
 		for file in files:
 			attachments.append(file.stream.read())
-		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com', current_user.email], f"description of project: {form.order_description.data}", None, attachments)
+		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com'], f"Client Email: {current_user.email}\ndescription of project: {form.order_description.data}", None, attachments)
 		return redirect('/success')
 	return render_template('frontend.html', title='Front End', form=form)
 
@@ -50,7 +50,7 @@ def basic_desktop_app():
 		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data, author=user)
 		db.session.add(order)
 		db.session.commit()
-		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com', current_user.email], f"Description of project: {form.order_description.data}\nExamples: {form.order_examps.data}")
+		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com'], f"Client Email: {current_user.email}\nDescription of project: {form.order_description.data}\nExamples: {form.order_examps.data}")
 		return redirect('/success')
 	return render_template('basicapp.html', title='Basic App', form=form)
 
@@ -63,7 +63,7 @@ def complex_desktop_app():
 		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data, author=user)
 		db.session.add(order)
 		db.session.commit()
-		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com', current_user.email], f"Description of project: {form.order_description.data}\nExamples: {form.order_examps.data}")
+		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com'], f"Client Email: {current_user.email}\nDescription of project: {form.order_description.data}\nExamples: {form.order_examps.data}")
 		return redirect('/success')
 	return render_template('complexapp.html', title='Complex App', form=form)
 
@@ -80,7 +80,8 @@ def Concept_Design():
 		attachments = []
 		for file in files:
 			attachments.append(file.stream.read())
-		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com', current_user.email], f"Description of project: {form.order_description.data}", None, attachments)
+		send_mail(form.order_name.data, current_user.email, ['cierraccontact@gmail.com'], f"Client Email: {current_user.email}\nDescription of project: {form.order_description.data}", None, attachments)
+		# time.sleep(80)
 		return redirect('/success')
 	return render_template('concept.html', title="Concept Design", form=form)
 
@@ -93,7 +94,7 @@ def database():
 		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data, author=user)
 		db.session.add(order)
 		db.session.commit()
-		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com', current_user.email], f"description of database: {form.order_description.data}")
+		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com'], f"Client Email: {current_user.email}\ndescription of database: {form.order_description.data}")
 		return redirect('/success')
 	return render_template('database.html', title='Database', form=form)
 
@@ -106,7 +107,7 @@ def CMS():
 		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data, author=user)
 		db.session.add(order)
 		db.session.commit()
-		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com', current_user.email], f"purpose of CMS: {form.order_description.data}")
+		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com'], f"Client Email: {current_user.email}\npurpose of CMS: {form.order_description.data}")
 		redirect('/success')
 	return render_template('cms.html', title='CMS', form=form)
 
@@ -172,16 +173,22 @@ def user(username):
 		order.order_flag = 'cancelled'
 		db.session.add(order)
 		db.session.commit()
-		send_mail(f"{form.confirm.data} cancelled", current_user.email, ['officialfoxtail@gmail.com', current_user.email], f"{form.confirm.data} has been cancelled")
+		send_mail(f"{form.confirm.data} cancelled", current_user.email, ['officialfoxtail@gmail.com'], f"{form.confirm.data} has been cancelled")
 	ordered = user.orders.filter_by(order_flag='open')
 	cancels = user.orders.filter_by(order_flag='cancelled')
 	completed = user.orders.filter_by(order_flag='completed')
 
 	return render_template('user.html', user=user, opens=ordered, cancels=cancels, completed=completed, form=form)
 
-@app.route('/support')
+@app.route('/service', methods=['GET', 'POST'])
+@login_required
 def support():
-	pass
+	form = SupportForm(request.form)
+	if request.method == 'POST' and form.validate():
+		send_mail('Issue!', current_user.email, ['officialfoxtail@gmail.com'], f"Issue: {form.issue.data}")
+		flash(f'Your issue has been sent, thank you {current_user.username}')
+		return redirect('/service')
+	return render_template('support.html', title="Support", form=form)
 
 @app.route('/about_the_devs')
 def ATD():

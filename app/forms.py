@@ -64,3 +64,7 @@ class CDForm(FlaskForm):
     order_description = StringField('Describe your design*', validators=[DataRequired()])
     order_reference = MultipleFileField('Any References?', validators=[FileAllowed(['jpg', 'png'], 'Images only!')])
     submit = SubmitField('Submit Order')
+
+class SupportForm(FlaskForm):
+    issue = StringField("Enter your issue*", validators=[DataRequired()])
+    submit = SubmitField('Submit your issue')

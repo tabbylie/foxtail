@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div id="container-support">
+        <div id="top-support">
+            <div id="issue-support">
+                <h1>Have an issue?</h1>
+                <p>We can help!</p>
+                <button id="button-support" onclick="openSupportForm()">Contact us!</button>
+                {% for message in get_flashed_messages() %}
+                    <p style="color: red;">{{ message }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="spacer-support"></div> 
+        <div id="faq-support">
+            <h1>FAQ</h1>
+            <div>
+                <h1>Who are we?</h1>
+                <p>We are FOXTAIL, an internet business designed with you in mind. We create and build web applications or desktop applications for you!</p>
+            </div>
+            <div>
+                <h1>What is our purpose?</h1>
+                <p>FOXTAIL's purpose is to create peoples imagination. Anything they may want, we will create it. Your vision can become a reality through us.</p>
+            </div>
+            <div>
+                <h1>I need to cancel an order, how will it work?</h1>
+                <p>There is a cancel button on orders for you to cancel that order. It will cancel the order quick and simple, and we will be notified of it!</p>
+            </div>
+            <div>
+                <h1>What if I want to edit one of my orders?</h1>
+                <p>Currently there is no way to edit your orders, so you would have to cancel the order and create a new one.</p>
+            </div>
+            <div>
+                <h1>Will you offer other products in the future?</h1>
+                <p>Yes! We plan on having dozens of different kinds of products so you can have as much customization as possible.</p>
+            </div>
+        </div>
+    </div>
+    <div id="support-form">
+        <div id="container-support-form">
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                {{ form.issue.label(class_="issue-label-support") }}
+                {{ form.issue(class_="issue-support", placeholder="Issue") }}
+                {{ form.submit(class_="submit-support") }}
+            </form>
+        </div>
+        <button id="cancel-support" onclick="closeSupportForm()">Cancel</button>
+    </div>
+{% endblock %}

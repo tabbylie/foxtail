@@ -1,43 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-    <div id="sign-in-div">
-        <div class="login-div">
-            <h1 class="big-sign-in">Sign In</h1>
-            <form action="" method="post" novalidate>
-                {{ form.hidden_tag() }}
-                <div class="username-pass-div-signin">
-                    {{ form.username.label(class_='username-label-login') }}<br>
-                    {{ form.username(size=20, class_='username-login', autofocus=true) }}<br>
-                    {% for error in form.username.errors %}
-                        <span class="username-error-signin">[{{ error }}]</span>
-                    {% endfor %}
-                    {{ form.password.label(class_='password-label-login') }}<br>
-                    {{ form.password(size=20, class_='password-login') }}<br>
-                    {% for error in form.password.errors %}
-                        <span class="password-error-signin">[{{ error }}]</span>
-                    {% endfor %}
-                    <div class="error-messages-signin">
-                        {% with messages = get_flashed_messages() %}
-                        {% if messages %}
-                        <ul style="position: absolute; top: 700px; left: 10px;">
-                            {% for message in messages %}
-                            <li style="color: red; list-style-type: none;">{{ message }}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                        {% endwith %}
+    <div id="container-login">
+        <div id="sign-in-div">
+            <div class="login-div">
+                <h1 class="big-sign-in">Sign In</h1>
+                <form action="" method="post" novalidate>
+                    {{ form.hidden_tag() }}
+                    <div class="username-pass-div-signin">
+                        {{ form.username.label(class_='username-label-login') }}<br>
+                        {{ form.username(size=20, class_='username-login', autofocus=true) }}<br>
+                        {% for error in form.username.errors %}
+                            <span class="username-error-signin">[{{ error }}]</span>
+                        {% endfor %}
+                        {{ form.password.label(class_='password-label-login') }}<br>
+                        {{ form.password(size=20, class_='password-login') }}<br>
+                        {% for error in form.password.errors %}
+                            <span class="password-error-signin">[{{ error }}]</span>
+                        {% endfor %}
+                        <div class="error-messages-signin">
+                            {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                            <ul style="position: absolute; top: 700px; left: 10px;">
+                                {% for message in messages %}
+                                <li style="color: red; list-style-type: none;">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            {% endwith %}
+                        </div>
+                        {{ form.remember_me(class_='remember-me-login') }} {{ form.remember_me.label(class_='remember-me-label-login') }}
+                        {{ form.submit(class_='sign-in-button-login') }}
                     </div>
-                    {{ form.remember_me(class_='remember-me-login') }} {{ form.remember_me.label(class_='remember-me-label-login') }}
-                    {{ form.submit(class_='sign-in-button-login') }}
-                </div>
-            </form>
-        </div>
-        <div class="side-div-login"></div>
-        <div class="sign-up-div-login">
-            <h2>Don't have an account?</h2>
-            <h5>Create one here!</h5>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis, dolores.</p>
-            <a href='/account/register' class="join-foxtail">Join Foxtail</a>
+                </form>
+            </div>
+            <div class="side-div-login"></div>
+            <div class="sign-up-div-login">
+                <h2>Don't have an account?</h2>
+                <h5>Create one here!</h5>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis, dolores.</p>
+                <a href='/account/register' class="join-foxtail">Join Foxtail</a>
+            </div>
         </div>
     </div>
 {% endblock %}
