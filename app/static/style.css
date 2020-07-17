@@ -701,7 +701,12 @@
 /*About the Developers*/
 
 #container-ATD {
-    position: absolute;
+    width: 98vw;
+    height: 98vh;
+}
+
+#wrapper-ATD {
+    position: relative;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -714,7 +719,7 @@
     flex-wrap: wrap;
 }
 
-#container-ATD div {
+#wrapper-ATD div {
     background: #E5C7BC;
     border: 1px solid black;
     border-radius: 10px;
@@ -724,11 +729,11 @@
     box-shadow: 2px 2px 4px pink;
 }
 
-#container-ATD p {
+#wrapper-ATD p {
     padding: 5px 0;
 }
 
-#container-ATD h1 {
+#wrapper-ATD h1 {
     padding: 5px 0;
 }
 
@@ -1234,4 +1239,15 @@
     justify-content: center;
     flex-flow: column wrap;
     margin-top: 10px;
+}
+
+/* Error Styling */
+
+#container-404 {
+    height: 99vh;
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
 }
