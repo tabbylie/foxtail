@@ -6,6 +6,7 @@
     margin: 0;
 }
 
+
 /*Color Scheme https://coolors.co/ff5700-692705-9c5935-cf8b64-d59a7a-ddb19b-e5c7bc-ffffff*/
 
 #header {
@@ -13,7 +14,7 @@
     top: 0;
     width: 100%;
     z-index: 2;
-    border-bottom: 1px solid black; 
+    border-bottom: 1px solid black;
     background-color: white;
 }
 
@@ -93,7 +94,7 @@
     position: absolute;
     min-width: 160px;
     border-radius: 5px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-content-header a {
@@ -139,7 +140,6 @@
     background-color: transparent;
 }
 
-
 .spacer {
     position: absolute;
     width: 100%;
@@ -176,11 +176,27 @@
     color: #FFFFFF;
 }
 
-.links-header:hover .dropdown-content-header {display: block;}
+.links-header:hover .dropdown-content-header {
+    display: block;
+}
 
-.links-header:hover .dropdown-content-header a {background-color: #E5C7BC;}
-.links-header:hover .dropdown-content-header a:hover {background-color: #692705; color: #CF8B64;} /*FF5700 */
-.links-header:hover .dropbtn {background-color: #E5C7BC; color:#000;}
+.links-header:hover .dropdown-content-header a {
+    background-color: #E5C7BC;
+}
+
+.links-header:hover .dropdown-content-header a:hover {
+    background-color: #692705;
+    color: #CF8B64;
+}
+
+
+/*FF5700 */
+
+.links-header:hover .dropbtn {
+    background-color: #E5C7BC;
+    color: #000;
+}
+
 
 /* Footer styling */
 
@@ -204,7 +220,9 @@
     transform: translate(-50%, -50%);
 }
 
-.nav-links-footer, .contact-us, .legal-info {
+.nav-links-footer,
+.contact-us,
+.legal-info {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -228,7 +246,14 @@
     font-size: 20px;
 }
 
+
 /*sign up styling */
+
+#signup-container {
+    background-color: transparent;
+    width: 100%;
+    height: 99vh;
+}
 
 #signup-div {
     position: absolute;
@@ -237,8 +262,8 @@
     border: 2px solid black;
     border-radius: 10px;
     width: 500px;
-    height: 300px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+    height: 350px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
 }
 
 .big-sign-up {
@@ -279,7 +304,7 @@
 .username-error-signup {
     color: red;
     position: absolute;
-    font-size: 10px;
+    font-size: 13px;
     min-width: 170px;
     top: 85px;
     left: 29px;
@@ -305,7 +330,7 @@
     position: absolute;
     top: 85px;
     left: 239px;
-    font-size: 10px;
+    font-size: 13px;
     min-width: 190px;
 }
 
@@ -326,10 +351,15 @@
 
 .password-error-signup-div {
     position: absolute;
-    top: 145px;
+    top: 150px;
     left: 29px;
     display: inline-block;
-    width: 380px;
+    font-size: 13px;
+    width: 500px;
+}
+
+.password-error-signup-div span {
+    color: red;
 }
 
 .password-error-signup {
@@ -354,10 +384,43 @@
     border-radius: 2px;
 }
 
+.tos-confirm {
+    position: absolute;
+    top: 180px;
+    left: 29px;
+}
+
+.tos-confirm-label {
+    position: absolute;
+    top: 180px;
+    left: 50px;
+    width: 350px;
+}
+
+.tos-confirm-errors {
+    position: absolute;
+    top: 220px;
+    left: 50px;
+    width: 500px;
+    color: red;
+    font-size: 13px;
+}
+
+.tos {
+    text-decoration: none;
+    color: #D34800;
+    transform: translate(-50%, -50%);
+    transition: color 0.5s ease, font-size 0.5s ease;
+}
+
+.tos:hover {
+    color: #692705;
+    font-size: 18px;
+}
 
 .sign-up-button {
     position: relative;
-    top: 60px;
+    top: 130px;
     left: 167px;
     padding: 10px 10px;
     width: 100px;
@@ -373,6 +436,7 @@
     background-color: #D59A7A;
     color: black;
 }
+
 
 /* Sign in styles */
 
@@ -390,7 +454,7 @@
     border-radius: 10px;
     width: 500px;
     height: 300px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
 }
 
 .big-sign-in {
@@ -482,7 +546,7 @@
 
 .sign-in-button-login {
     position: relative;
-    top: 120px;
+    top: 130px;
     left: 40px;
     padding: 7px 5px;
     width: 100px;
@@ -518,7 +582,7 @@
 
 .join-foxtail {
     position: relative;
-    top: 49px;
+    top: 10px;
     left: 22px;
     text-decoration: none;
     background-color: #FF5700;
@@ -534,13 +598,14 @@
     color: black;
 }
 
+
 /*account display*/
 
 .info-user-profile {
     position: absolute;
     top: 55px;
     width: 100%;
-    background: linear-gradient(to bottom,#E1BCAC, #ffffff);
+    background: linear-gradient(to bottom, #E1BCAC, #ffffff);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -654,7 +719,7 @@
     z-index: 1;
     max-width: 250px;
     padding: 8px 10px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 #cancel-div h1 {
@@ -697,6 +762,7 @@
 .submit-user-profile:hover {
     transform: translateX(8px);
 }
+
 
 /*About the Developers*/
 
@@ -742,6 +808,7 @@
     height: 20px;
     width: 100%;
 }
+
 .links-ATD a {
     text-decoration: none;
 }
@@ -786,6 +853,7 @@
     padding: 5px 0;
 }
 
+
 /* Products css */
 
 .container-products {
@@ -818,7 +886,6 @@
 
 .container-products table th {
     color: #692705;
-    
 }
 
 .button-td-products {
@@ -855,7 +922,6 @@
     text-align: center;
 }
 
-
 .name-products {
     background-color: #D58558 !important;
     color: white !important;
@@ -868,6 +934,7 @@
     border-right: 1px solid black;
     border-left: 1px solid black;
 }
+
 
 /* Customization styling */
 
@@ -949,7 +1016,6 @@
     justify-content: center;
     max-width: 250px;
 }
-
 
 .name-div-basicapp {
     padding-bottom: 10px;
@@ -1096,6 +1162,7 @@
     padding: 10px 15px;
 }
 
+
 /* support styling */
 
 #container-support {
@@ -1111,7 +1178,9 @@
     background-image: linear-gradient(to right, #ff5700, #ffffff, #ff5700);
     margin: 0 auto;
 }
-#top-support h1, #top-support p{
+
+#top-support h1,
+#top-support p {
     color: #FF5700;
 }
 
@@ -1125,7 +1194,8 @@
     text-align: center;
 }
 
-#issue-support h1, p {
+#issue-support h1,
+p {
     padding-top: 10px;
 }
 
@@ -1206,7 +1276,7 @@
 }
 
 #cancel-support:hover {
-    transform: translateX(-10%);   
+    transform: translateX(-10%);
 }
 
 #spacer-support {
@@ -1230,6 +1300,7 @@
     text-align: center;
 }
 
+
 /* #faq-support h1, #faq-support p {
     color: #ff5700;
 } */
@@ -1240,6 +1311,7 @@
     flex-flow: column wrap;
     margin-top: 10px;
 }
+
 
 /* Error Styling */
 

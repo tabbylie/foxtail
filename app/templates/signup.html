@@ -1,36 +1,25 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
+<div id="signup-container">
     <div id="signup-div">
         <div class="singup-div">
             <h1 class="big-sign-up">Sign Up</h1>
             <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
                 <div class="username-pass-div-signup">
-                    {{ form.username.label(class_='username-label-signup') }}<br>
-                    {{ form.username(size=20, class_='username-signup') }}<br>
-                    {% for error in form.username.errors %}
-                        <span class="username-error-signup">[{{ error }}]</span>
-                    {% endfor %}
-                    {{ form.email.label(class_='email-label-signup') }}<br>
-                    {{ form.email(size=20, class_='email-signup')}}<br>
-                    {% for error in form.email.errors %}
-                        <span class="email-error-signup">[{{ error }}]</span>
-                    {% endfor %}
-                    {{ form.password.label(class_='password-label-signup') }}<br>
-                    {{ form.password(size=20, class_='password-signup') }}<br>
+                    {{ form.username.label(class_='username-label-signup') }}<br> {{ form.username(size=15, class_='username-signup') }}<br> {% for error in form.username.errors %}
+                    <span class="username-error-signup">[{{ error }}]</span> {% endfor %} {{ form.email.label(class_='email-label-signup') }}<br> {{ form.email(size=15, class_='email-signup')}}<br> {% for error in form.email.errors %}
+                    <span class="email-error-signup">[{{ error }}]</span> {% endfor %} {{ form.password.label(class_='password-label-signup') }}<br> {{ form.password(size=15, class_='password-signup') }}<br> {{ form.confirm_pass.label(class_='confirm-pass-label-signup')
+                    }} {{ form.confirm_pass(size=15, class_='confirm-pass-signup') }}
                     <div class="password-error-signup-div">
                         {% for error in form.password.errors %}
-                            <span class="password-error-signup">[{{ error }}]</span>
-                        {% endfor %}
+                        <span class="password-error-signup">[{{ error }}]</span> {% endfor %} {% for error in form.confirm_pass.errors %}
+                        <span class="confirm-pass-error-signup">[{{ error }}]</span> {% endfor %}
                     </div>
-                    {{ form.confirm_pass.label(class_='confirm-pass-label-signup') }}
-                    {{ form.confirm_pass(size=20, class_='confirm-pass-signup') }}
-                    {% for error in form.confirm_pass.errors %}
-                        <span class="confirm-pass-error-signup">[{{ error }}]</span>
-                    {% endfor %}
-                    {{ form.submit(class_='sign-up-button') }}
+                    {{ form.tos_confirm(class_='tos-confirm') }} {{ form.tos_confirm.label(class_='tos-confirm-label') }} {% for error in form.tos_confirm.errors %}
+                    <span class="tos-confirm-errors">[{{ error }}]</span> {% endfor %} {{ form.submit(class_='sign-up-button') }}
                 </div>
             </form>
         </div>
     </div>
+</div>
 {% endblock %}

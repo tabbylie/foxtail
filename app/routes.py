@@ -193,3 +193,8 @@ def support():
 @app.route('/about_the_devs')
 def ATD():
 	return render_template('about_the_devs.html', title='about the devs')
+
+@app.route('/terms of service')
+def tos():
+	return render_template('tos.html', title="Terms of Service")
+
