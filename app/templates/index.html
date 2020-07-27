@@ -24,7 +24,7 @@
                         <div class="dropdown-content-header">
                             <a href="/products">Products</a>
                             <a href="/service">Support</a>
-                            <a href="/termsofservice">Terms of Service</a>
+                            <a href="/terms of service">Terms of Service</a>
                             <a href="/aboutus">About FOXTAIl</a>
                             <a href="/about_the_devs">About the Devs</a>
                         </div>
@@ -130,7 +130,7 @@
             </div>
             <div class="legal-info">
                 <h1>Legal</h1>
-                <a href="/tos">Terms of Service</a>
+                <a href="/terms of service">Terms of Service</a>
             </div>
         </footer>
         <script type="text/javascript" >
@@ -140,6 +140,10 @@
                 img = document.getElementById("menu-icon");
                 img.src = img.src == offImg ? onImg : offImg;
             }
+            let header = document.querySelector('#header');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('headerChange', window.scrollY > 0);
+            })
         </script>
     </body>
 </html>
