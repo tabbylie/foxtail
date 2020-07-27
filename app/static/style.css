@@ -1323,3 +1323,79 @@ p {
     justify-content: center;
     align-items: center;
 }
+
+/* Dev styling */
+
+.container-add_products {
+    width: 100%;
+    height: 99vh;
+}
+
+.wrapper-add_products {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 15px 10px;
+    display: flex;
+    justify-content: center;
+    max-width: 200px;
+}
+
+.order-name-add_products {
+    border: 1px solid black;
+    margin: 5px 0;
+    padding: 3px 5px;
+    border-radius: 5px;
+    width: 60%;
+    transition: all 0.3s ease-in;
+}
+
+.order-name-add_products:focus {
+    width: 90%;
+}
+
+.order-desc-add_products {
+    border: 1px solid black;
+    margin: 5px 0;
+    padding: 3px 5px;
+    border-radius: 5px;
+    width: 60%;
+    transition: all 0.3s ease-in;
+}
+
+.order-desc-add_products:focus {
+    width: 90%;
+}
+
+.order-price-add_products {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 1px 5px;
+    margin: 5px 0;
+    transition: 0.3s;
+    width: 60%;
+    transition: all 0.3s ease-in;
+}
+
+.order-price-add_products:focus {
+    width: 90%;
+}
+
+.order-submit-add_products {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #FF5700;
+    color: white;
+    border-radius: 100px;
+    padding: 5px 10px;
+    transition: 0.7s;
+}
+
+.order-submit-add_products:hover {
+    background-color: #D58558;
+    padding: 10px 15px;
+}

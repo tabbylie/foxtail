@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, request
 from app import app, db
-from app.forms import LoginForm, SignUpForm, CancelForm, BasicAppForm, ComplexAppForm, FrontEndForm, DatabaseForm, CMSForm, CDForm, SupportForm
+from app.forms import LoginForm, SignUpForm, CancelForm, BasicAppForm, ComplexAppForm, FrontEndForm, DatabaseForm, CMSForm, CDForm, SupportForm, AddProductsForm
 from app.models import User, Products, Orders
 from app.email import send_mail
 from flask_login import current_user, login_user, logout_user, login_required
@@ -197,3 +197,12 @@ def ATD():
 def tos():
 	return render_template('tos.html', title="Terms of Service")
 
+@app.route('/add_products', methods=['GET', 'POST'])
+def add():
+	form = AddProductsForm()
+	if request.method == 'POST' and form.validate():
+		product = Products(name=form.name.data, desc=form.desc.data, price=form.price.data)
+		db.session.add(product)
+		db.session.commit()
+		return redirect('/add_products')
+	return render_template('add_products.html', name="add products", form=form)
