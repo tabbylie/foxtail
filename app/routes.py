@@ -212,7 +212,7 @@ def del_products():
 	form = DelProductsForm()
 	if request.method == 'POST' and form.validate():
 		Product = Products.query.filter_by(name=form.name.data).first_or_404()
-		db.session.delete(product)
+		db.session.delete(Product)
 		db.session.commit()
 		return redirect('/del_products')
 	return render_template('delete_products.html', name="delete products", form=form)
