@@ -15,7 +15,7 @@
                         <span class="password-error-signup">[{{ error }}]</span> {% endfor %} {% for error in form.confirm_pass.errors %}
                         <span class="confirm-pass-error-signup">[{{ error }}]</span> {% endfor %}
                     </div>
-                    {{ form.tos_confirm(class_='tos-confirm') }} {{ form.tos_confirm.label(class_='tos-confirm-label') }} <a href="/terms%20of%20service">terms of service</a> {% for error in form.tos_confirm.errors %}
+                    {{ form.tos_confirm(class_='tos-confirm') }} {{ form.tos_confirm.label(class_='tos-confirm-label') }} <a href="/terms%20of%20service" class="tos">terms of service</a> {% for error in form.tos_confirm.errors %}
                     <span class="tos-confirm-errors">[{{ error }}]</span> {% endfor %} {{ form.submit(class_='sign-up-button') }}
                 </div>
             </form>
