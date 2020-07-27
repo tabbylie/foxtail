@@ -180,7 +180,6 @@ def user(username):
 	return render_template('user.html', user=user, opens=ordered, cancels=cancels, completed=completed, form=form)
 
 @app.route('/service', methods=['GET', 'POST'])
-@login_required
 def support():
 	form = SupportForm(request.form)
 	if request.method == 'POST' and form.validate():
