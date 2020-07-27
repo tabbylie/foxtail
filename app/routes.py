@@ -14,7 +14,7 @@ import numpy as np
 def index():
 	basic_app = Products.query.filter_by(name="Basic Desktop App").first()
 	front_end = Products.query.filter_by(name="Front End").first()
-	database = Products.query.filter_by(name="Database ").first()
+	database = Products.query.filter_by(name="Database").first()
 	return render_template('index.html', title="Home", products=[basic_app, front_end, database])
 
 @app.route('/products')
