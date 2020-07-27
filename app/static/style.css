@@ -601,6 +601,11 @@
 
 /*account display*/
 
+#container-user {
+    width: 100%;
+    height: 99vh;
+}
+
 .info-user-profile {
     position: absolute;
     top: 55px;
