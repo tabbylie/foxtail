@@ -412,8 +412,8 @@
     transform: translate(-50%, -50%);
     transition: color 0.5s ease, font-size 0.5s ease;
     position: absolute;
-    top: 250px;
-    left: 50px;
+    top: 230px;
+    left: 30px;
 }
 
 .tos:hover {
