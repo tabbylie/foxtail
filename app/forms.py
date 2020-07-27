@@ -69,3 +69,13 @@ class CDForm(FlaskForm):
 class SupportForm(FlaskForm):
     issue = StringField("Enter your issue*", validators=[DataRequired()])
     submit = SubmitField('Submit your issue')
+
+class AddProductsForm(FlaskForm):
+    name = StringField("Enter the name", validators=[DataRequired()])
+    desc = StringField("Enter the desc", validators=[DataRequired()])
+    price = StringField("Enter the price", validators=[DataRequired()])
+    submit = SubmitField("Submit")
+
+class DelProductsForm(FlaskForm):
+    name = StringField("Enter the name", validators=[DataRequired()])
+    submit = SubmitField("Submit")

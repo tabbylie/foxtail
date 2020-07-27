@@ -4,3 +4,4 @@
 database_adding.py
 testing.py
 /migrations
+/venv
