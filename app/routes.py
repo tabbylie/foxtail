@@ -8,7 +8,6 @@ from werkzeug.urls import url_parse
 import os
 import io
 import numpy as np
-import cv2
 
 @app.route('/')
 @app.route('/index')

@@ -16,4 +16,3 @@ flask_login==0.5.0
 flask_mail==0.9.1
 email_validator==1.0.3
 numpy==1.18.4
-opencv-python==4.3.0.36
