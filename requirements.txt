@@ -11,3 +11,4 @@ tail==0.1.12
 psycopg2==2.8.5
 flask_sqlalchemy==2.4.0
 flask_migrate==2.5.3
+flask_login==0.5.0
