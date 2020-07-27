@@ -75,3 +75,7 @@ class AddProductsForm(FlaskForm):
     desc = StringField("Enter the desc", validators=[DataRequired()])
     price = StringField("Enter the price", validators=[DataRequired()])
     submit = SubmitField("Submit")
+
+class DelProductsForm(FlaskForm):
+    name = StringField("Enter the name", validators=[DataRequired()])
+    submit = SubmitField("Submit")

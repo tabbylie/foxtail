@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, request
 from app import app, db
-from app.forms import LoginForm, SignUpForm, CancelForm, BasicAppForm, ComplexAppForm, FrontEndForm, DatabaseForm, CMSForm, CDForm, SupportForm, AddProductsForm
+from app.forms import LoginForm, SignUpForm, CancelForm, BasicAppForm, ComplexAppForm, FrontEndForm, DatabaseForm, CMSForm, CDForm, SupportForm, AddProductsForm, DelProductsForm
 from app.models import User, Products, Orders
 from app.email import send_mail
 from flask_login import current_user, login_user, logout_user, login_required
@@ -206,3 +206,13 @@ def add():
 		db.session.commit()
 		return redirect('/add_products')
 	return render_template('add_products.html', name="add products", form=form)
+
+@app.route('/del_products', methods=['GET', 'POST'])
+def del_products():
+	form = DelProductsForm()
+	if request.method == 'POST' and form.validate():
+		Product = Products.query.filter_by(name=form.name.data).first_or_404()
+		db.session.delete(product)
+		db.session.commit()
+		return redirect('/del_products')
+	return render_template('delete_products.html', name="delete products", form=form)
