@@ -1,1 +1,1 @@
-web: gunicorn officialfoxtail:foxtail.py
+web: gunicorn tail:foxtail.py
