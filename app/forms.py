@@ -15,7 +15,7 @@ class SignUpForm(FlaskForm):
     email = StringField('Email*', validators=[DataRequired(), Email()])
     password = PasswordField('Password*', validators=[DataRequired(),  Length(min=7, max=15)])
     confirm_pass = PasswordField('Repeat Password*', validators=[DataRequired(), EqualTo('password', message="Passwords must match.")])
-    tos_confirm = BooleanField('By creating an account, you agree to the <a href="/terms of service" class="tos">Terms of Service</a>', validators=[DataRequired()])
+    tos_confirm = BooleanField('By creating an account, you agree to the Terms of Service, validators=[DataRequired()])
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):
