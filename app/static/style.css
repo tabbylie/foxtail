@@ -412,8 +412,8 @@
     transform: translate(-50%, -50%);
     transition: color 0.5s ease, font-size 0.5s ease;
     position: absolute;
-    top: 215px;
-    left: 95px;
+    top: 210px;
+    left: 110px;
     min-width: 150px;
 }
 
