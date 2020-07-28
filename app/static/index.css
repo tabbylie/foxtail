@@ -193,7 +193,7 @@
 .requirements {
     position: absolute;
     top: 700px;
-    width: 100%;
+    width: 100vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
