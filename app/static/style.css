@@ -868,6 +868,7 @@
 .container-products {
     margin-top: 55px;
     text-align: center;
+    scroll-behavior: auto;
 }
 
 .container-products table {
