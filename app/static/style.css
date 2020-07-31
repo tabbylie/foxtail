@@ -64,6 +64,7 @@
 .account-links-header-logged-in {
     float: right;
     min-width: 100px;
+    color: black;
 }
 
 .account-links-header-logged-in a {
