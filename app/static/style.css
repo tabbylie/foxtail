@@ -904,20 +904,19 @@
     color: #ffffff;
     line-height: 21px;
     border-radius: 0 5px 5px 0;
+    transition: transform 0.3s ease-in-out;
 }
-
-.container-products table th a {
-    background-color: #FF5700;
+.button-td-products a button {
+    background-color: #ff5700;
     color: white;
     padding: 9px 12px;
-    border-radius: 100px;
-    transform: translateX(0px);
-    transition: transform 0.7s;
+    border-radius: 20px;
     text-decoration: none;
+    transition: transform 0.3s ease-in-out;
 }
 
-.container-products table th a:hover {
-    transform: translateX(8px);
+.button-td-products a button:hover {
+    transform: translateX(-5px);
 }
 
 .container-products table td:first-child {
