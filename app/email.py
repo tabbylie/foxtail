@@ -1,5 +1,10 @@
 from flask_mail import Message
-from app import mail
+from app import app, mail
+import threading
+
+def send_async_email(app, msg):
+    with app.app_context():
+        mail.send(msg)
 
 def send_mail(subject, sender, recipients, text_body, html_body=None, attachments:list=None):
     msg = Message(subject, sender=sender, recipients=recipients)
@@ -9,4 +14,4 @@ def send_mail(subject, sender, recipients, text_body, html_body=None, attachment
     if attachments is not None:
         for byte in attachments:
             msg.attach("image.png", "image/png", byte)
-    mail.send(msg)
+    threading.Thread(target=send_async_email, args=(app, msg)).start()
