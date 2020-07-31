@@ -63,8 +63,9 @@
 
 .account-links-header-logged-in {
     float: right;
-    min-width: 130px;
-    color: black;
+    min-width: 100px;
+    display: flex;
+    flex-flow: row nowrap;
 }
 
 .account-links-header-logged-in a {
