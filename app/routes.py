@@ -211,7 +211,7 @@ def add():
 		return render_template('404.html'), 404
 @app.route('/del_products', methods=['GET', 'POST'])
 def del_products():
-	if current_user.email == 'dyoung8765@gmail.com':
+	if current_user.email in ['dyoung8765@gmail.com', 'officialfoxtail@gmail.com']:
 		form = DelProductsForm()
 		if request.method == 'POST' and form.validate():
 			Product = Products.query.filter_by(name=form.name.data).first_or_404()
