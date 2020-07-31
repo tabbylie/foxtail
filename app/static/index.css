@@ -155,7 +155,7 @@
 .top-spacer {
     position: absolute;
     width: 100%;
-    top: 596px;
+    top: 613px;
     height: 7px;
     z-index: 1;
     background-color: #CF8B64;
@@ -168,7 +168,7 @@
 .spacer {
     position: absolute;
     width: 100%;
-    top: 603px;
+    top: 620px;
     height: 3em;
     z-index: 1;
     background-color: #CF8B64;
@@ -192,7 +192,7 @@
 
 .requirements {
     position: relative;
-    top: 50px;
+    top: 60px;
     width: 100%;
     display: flex;
     justify-content: space-evenly;
