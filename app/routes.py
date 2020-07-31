@@ -197,21 +197,27 @@ def tos():
 	return render_template('tos.html', title="Terms of Service")
 
 @app.route('/add_products', methods=['GET', 'POST'])
+@login_required
 def add():
-	form = AddProductsForm()
-	if request.method == 'POST' and form.validate():
-		product = Products(name=form.name.data, desc=form.desc.data, price=form.price.data)
-		db.session.add(product)
-		db.session.commit()
-		return redirect('/add_products')
-	return render_template('add_products.html', name="add products", form=form)
-
+	if current_user.email == 'dyoung8765@gmail.com':
+		form = AddProductsForm()
+		if request.method == 'POST' and form.validate():
+			product = Products(name=form.name.data, desc=form.desc.data, price=form.price.data)
+			db.session.add(product)
+			db.session.commit()
+			return redirect('/add_products')
+		return render_template('add_products.html', name="add products", form=form)
+	else:
+		return render_template('404.html'), 404
 @app.route('/del_products', methods=['GET', 'POST'])
 def del_products():
-	form = DelProductsForm()
-	if request.method == 'POST' and form.validate():
-		Product = Products.query.filter_by(name=form.name.data).first_or_404()
-		db.session.delete(Product)
-		db.session.commit()
-		return redirect('/del_products')
-	return render_template('delete_products.html', name="delete products", form=form)
+	if current_user.email == 'dyoung8765@gmail.com':
+		form = DelProductsForm()
+		if request.method == 'POST' and form.validate():
+			Product = Products.query.filter_by(name=form.name.data).first_or_404()
+			db.session.delete(Product)
+			db.session.commit()
+			return redirect('/del_products')
+		return render_template('delete_products.html', name="delete products", form=form)
+	else:
+		return render_template('404.html'), 404
