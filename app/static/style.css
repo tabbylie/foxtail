@@ -493,6 +493,7 @@
     left: 10px;
     border: 1px solid black;
     border-radius: 2px;
+    padding: 3px 5px;
 }
 
 .username-error-signin {
