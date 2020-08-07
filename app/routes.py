@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, request
 from app import app, db
-from app.forms import LoginForm, SignUpForm, CancelForm, BasicAppForm, ComplexAppForm, FrontEndForm, DatabaseForm, CMSForm, CDForm, SupportForm, AddProductsForm, DelProductsForm
+from app.forms import LoginForm, SignUpForm, CancelForm, BasicAppForm, ComplexAppForm, FrontEndForm, DatabaseForm, CMSForm, CDForm, SupportForm, ProductsFormAdmin, OrdersFormAdmin
 from app.models import User, Products, Orders
 from app.email import send_mail
 from flask_login import current_user, login_user, logout_user, login_required
@@ -196,28 +196,60 @@ def ATD():
 def tos():
 	return render_template('tos.html', title="Terms of Service")
 
-@app.route('/add_products', methods=['GET', 'POST'])
-@login_required
-def add():
-	if current_user.email == 'dyoung8765@gmail.com':
-		form = AddProductsForm()
-		if request.method == 'POST' and form.validate():
-			product = Products(name=form.name.data, desc=form.desc.data, price=form.price.data)
-			db.session.add(product)
-			db.session.commit()
-			return redirect('/add_products')
-		return render_template('add_products.html', name="add products", form=form)
-	else:
-		return render_template('404.html'), 404
-@app.route('/del_products', methods=['GET', 'POST'])
-def del_products():
+@app.route('/admin_panel', methods=['GET', 'POST'])
+def admin_panel():
 	if current_user.email in ['dyoung8765@gmail.com', 'officialfoxtail@gmail.com']:
-		form = DelProductsForm()
-		if request.method == 'POST' and form.validate():
-			Product = Products.query.filter_by(name=form.name.data).first_or_404()
-			db.session.delete(Product)
-			db.session.commit()
-			return redirect('/del_products')
-		return render_template('delete_products.html', name="delete products", form=form)
+		productsform = ProductsFormAdmin()
+		ordersform = OrdersFormAdmin()
+		if productsform.submit1.data and productsform.validate():
+			if productsform.type_.data == 'list_':
+				products = Products.query.all()
+				arr1 = []
+				for product in products:
+					arr.append(product)
+				return render_template('admin_panel.html', title="Admin Panel", products=productsform, products_arr=arr, orders=ordersform)
+			if productsform.type_.data == 'add_':
+				try:
+					int(productsform.price.data)
+				except:
+					return render_template('admin_panel.html', title='Admin Panel', products=productsform, products_arr=[f'Error! {productsform.price.data} is not an integer!'], orders=ordersform)
+				product = Products(name=productsform.name.data, desc=productsform.desc.data, price=int(productsform.price.data))
+				db.session.add(product)
+				db.session.commit()
+				return redirect('/admin_panel')
+			if productsform.type_.data == 'del_':
+				Product = Products.query.filter_by(name=productsform.name.data).first()
+				if Product != None:
+					db.session.delete(Product)
+					db.session.commit()
+					return redirect('/admin_panel')
+				else:
+					return render_template('admin_panel.html', title='Admin Panel', products=productsform, products_arr=[f'Error! {productsform.name.data} does not exist'], orders=ordersform)
+			
+		if ordersform.submit2.data and ordersform.validate():
+			if ordersform.types.data == 'list':
+				orders = Orders.query.all()
+				arr = []
+				for order in orders:
+					arr.append(order)
+				return render_template('admin_panel.html', title="Admin Panel", products=productsform, orders=ordersform, orders_arr=arr)
+			if ordersform.types.data == 'del':
+				order = Orders.query.filter_by(order_name=ordersform.name.data).first()
+				if order != None:
+					db.session.delete(order)
+					db.session.commit()
+					return redirect('/admin_panel')
+				else:
+					return render_template('admin_panel.html', title='Admin Panel', products=productsform, orders_arr=[f'Error! {ordersform.name.data} does not exist'], orders=ordersform)
+			if ordersform.types.data == 'complete':
+				order = Orders.query.filter_by(order_name=ordersform.name.data).first()
+				if order != None:
+					order.order_flag == 'complete'
+					db.session.add(order)
+					db.session.commit()
+				else:
+					return render_template('admin_panel.html', title='Admin Panel', products=productsform, orders_arr=[f'Error! {ordersform.name.data} does not exist'], orders=ordersform)
+
+		return render_template('admin_panel.html', title="Admin Panel", products=productsform, orders=ordersform)
 	else:
-		return render_template('404.html'), 404
+		return 404

@@ -70,12 +70,14 @@ class SupportForm(FlaskForm):
     issue = StringField("Enter your issue*", validators=[DataRequired()])
     submit = SubmitField('Submit your issue')
 
-class AddProductsForm(FlaskForm):
-    name = StringField("Enter the name", validators=[DataRequired()])
-    desc = StringField("Enter the desc", validators=[DataRequired()])
-    price = StringField("Enter the price", validators=[DataRequired()])
-    submit = SubmitField("Submit")
+class ProductsFormAdmin(FlaskForm):
+    name = StringField("Enter the name")
+    desc = StringField("Enter the description")
+    price = StringField("Enter the price")
+    type_ = SelectField("Enter a type", validators=[DataRequired()], choices=[('list_', 'List'), ('add_', 'Add'), ('del_', 'Delete')])
+    submit1 = SubmitField("Submit")
 
-class DelProductsForm(FlaskForm):
-    name = StringField("Enter the name", validators=[DataRequired()])
-    submit = SubmitField("Submit")
+class OrdersFormAdmin(FlaskForm):
+    name = StringField("Enter the order name")
+    types = SelectField("Enter what to do", validators=[DataRequired()], choices=[('list', 'List'), ('del', 'Delete'), ('complete', 'Complete')])
+    submit2 = SubmitField("Submit")
