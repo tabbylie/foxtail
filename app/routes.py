@@ -49,7 +49,7 @@ def basic_desktop_app():
 		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data, author=user)
 		db.session.add(order)
 		db.session.commit()
-		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com'], f"Client Email: {current_user.email}\nDescription of project: {form.order_description.data}\nExamples: {form.order_examps.data}")
+		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com'], f"Client Email: {current_user.email}\nName of project: {form.order_name.data}\nDescription of project: {form.order_description.data}\nExamples: {form.order_examps.data}")
 		return redirect('/success')
 	return render_template('basicapp.html', title='Basic App', form=form)
 
