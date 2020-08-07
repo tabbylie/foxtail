@@ -204,7 +204,7 @@ def admin_panel():
 		if productsform.submit1.data and productsform.validate():
 			if productsform.type_.data == 'list_':
 				products = Products.query.all()
-				arr1 = []
+				arr = []
 				for product in products:
 					arr.append(product)
 				return render_template('admin_panel.html', title="Admin Panel", products=productsform, products_arr=arr, orders=ordersform)
