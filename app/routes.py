@@ -243,8 +243,10 @@ def admin_panel():
 					return render_template('admin_panel.html', title='Admin Panel', products=productsform, orders_arr=[f'Error! {ordersform.name.data} does not exist'], orders=ordersform)
 			if ordersform.types.data == 'complete':
 				order = Orders.query.filter_by(order_name=ordersform.name.data).first()
+				print(order)
 				if order != None:
-					order.order_flag == 'completed'
+					order.order_flag = 'completed'
+					print(order.order_flag)
 					db.session.add(order)
 					db.session.commit()
 				else:
