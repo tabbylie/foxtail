@@ -244,7 +244,7 @@ def admin_panel():
 			if ordersform.types.data == 'complete':
 				order = Orders.query.filter_by(order_name=ordersform.name.data).first()
 				if order != None:
-					order.order_flag == 'complete'
+					order.order_flag == 'completed'
 					db.session.add(order)
 					db.session.commit()
 				else:
