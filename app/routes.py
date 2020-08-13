@@ -80,7 +80,6 @@ def Concept_Design():
 		for file in files:
 			attachments.append(file.stream.read())
 		send_mail(form.order_name.data, current_user.email, ['cierraccontact@gmail.com'], f"Client Email: {current_user.email}\nDescription of project: {form.order_description.data}", None, attachments)
-		# time.sleep(80)
 		return redirect('/success')
 	return render_template('concept.html', title="Concept Design", form=form)
 
@@ -179,7 +178,7 @@ def user(username):
 		completed = user.orders.filter_by(order_flag='completed')
 
 		return render_template('user.html', user=user, opens=ordered, cancels=cancels, completed=completed, form=form, isAdmin=False)
-	else:
+	else:c
 		user = User.query.filter_by(username=username).first_or_404()
 		form = CancelForm()
 		if form.validate_on_submit():
