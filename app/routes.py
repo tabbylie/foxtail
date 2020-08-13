@@ -178,7 +178,7 @@ def user(username):
 		completed = user.orders.filter_by(order_flag='completed')
 
 		return render_template('user.html', user=user, opens=ordered, cancels=cancels, completed=completed, form=form, isAdmin=False)
-	else:c
+	else:
 		user = User.query.filter_by(username=username).first_or_404()
 		form = CancelForm()
 		if form.validate_on_submit():
