@@ -165,19 +165,34 @@ def register():
 @app.route('/account/<username>', methods=['GET', 'POST'])
 @login_required
 def user(username):
-	user = User.query.filter_by(username=username).first_or_404()
-	form = CancelForm()
-	if form.validate_on_submit():
-		order = user.orders.filter_by(order_name=form.confirm.data).first_or_404()
-		order.order_flag = 'cancelled'
-		db.session.add(order)
-		db.session.commit()
-		send_mail(f"{form.confirm.data} cancelled", current_user.email, ['officialfoxtail@gmail.com'], f"{form.confirm.data} has been cancelled")
-	ordered = user.orders.filter_by(order_flag='open')
-	cancels = user.orders.filter_by(order_flag='cancelled')
-	completed = user.orders.filter_by(order_flag='completed')
+	if current_user.email not in ['dyoung8765@gmail.com', 'officialfoxtail@gmail.com', '']: 
+		user = User.query.filter_by(username=username).first_or_404()
+		form = CancelForm()
+		if form.validate_on_submit():
+			order = user.orders.filter_by(order_name=form.confirm.data).first_or_404()
+			order.order_flag = 'cancelled'
+			db.session.add(order)
+			db.session.commit()
+			send_mail(f"{form.confirm.data} cancelled", current_user.email, ['officialfoxtail@gmail.com'], f"{form.confirm.data} has been cancelled")
+		ordered = user.orders.filter_by(order_flag='open')
+		cancels = user.orders.filter_by(order_flag='cancelled')
+		completed = user.orders.filter_by(order_flag='completed')
 
-	return render_template('user.html', user=user, opens=ordered, cancels=cancels, completed=completed, form=form)
+		return render_template('user.html', user=user, opens=ordered, cancels=cancels, completed=completed, form=form, isAdmin=False)
+	else:
+		user = User.query.filter_by(username=username).first_or_404()
+		form = CancelForm()
+		if form.validate_on_submit():
+			order = user.orders.filter_by(order_name=form.confirm.data).first_or_404()
+			order.order_flag = 'cancelled'
+			db.session.add(order)
+			db.session.commit()
+			send_mail(f"{form.confirm.data} cancelled", current_user.email, ['officialfoxtail@gmail.com'], f"{form.confirm.data} has been cancelled")
+		ordered = user.orders.filter_by(order_flag='open')
+		cancels = user.orders.filter_by(order_flag='cancelled')
+		completed = user.orders.filter_by(order_flag='completed')
+
+		return render_template('user.html', user=user, opens=ordered, cancels=cancels, completed=completed, form=form, isAdmin=True)
 
 @app.route('/service', methods=['GET', 'POST'])
 def support():
