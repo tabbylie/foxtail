@@ -5,3 +5,6 @@ database_adding.py
 testing.py
 /migrations
 /venv
+foxtail
+server.csr
+server.key
