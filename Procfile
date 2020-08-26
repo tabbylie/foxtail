@@ -1,1 +1,1 @@
-web: flask db upgrade; gunicorn foxtail:app
+web: flask db migrate -m "added!"; flask db upgrade; gunicorn foxtail:app

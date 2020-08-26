@@ -203,13 +203,17 @@ def user(username):
 			db.session.commit()
 			send_mail(f"{cancelform.confirm.data} cancelled", current_user.email, ['officialfoxtail@gmail.com'], f"{cancelform.confirm.data} has been cancelled")
 		if editform.submit2.data and editform.validate():
-			user.username = editform.name.data
-			filename = secure_filename(editform.profileimg.data.filename)
-			print(filename)
-			editform.profileimg.data.save('./static/profile_imgs/' + filename)
-			user.profile_img = './static/profile_imgs/' + filename
+			if editform.name.data:
+				user.username = editform.name.data
+			if editform.profileimg.data:
+				file = request.files.get(editform.profileimg.name)
+				filename = secure_filename(file.filename)
 
-			return redirect('/account/<username>')
+				file.save(app.config['UPLOAD_FOLDER'] + filename)
+
+				user.profile_img = '/static/profile_imgs/' + filename
+				db.session.add(user)
+				db.session.commit()
 		ordered = user.orders.filter_by(order_flag='open')
 		cancels = user.orders.filter_by(order_flag='cancelled')
 		completed = user.orders.filter_by(order_flag='completed')
