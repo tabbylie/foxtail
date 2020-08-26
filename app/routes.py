@@ -202,6 +202,7 @@ def user(username):
 			db.session.add(order)
 			db.session.commit()
 			send_mail(f"{cancelform.confirm.data} cancelled", current_user.email, ['officialfoxtail@gmail.com'], f"{cancelform.confirm.data} has been cancelled")
+		print(editform.submit2.data)
 		if editform.submit2.data and editform.validate():
 			if editform.name.data:
 				user.username = editform.name.data
