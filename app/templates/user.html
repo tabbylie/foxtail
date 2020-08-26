@@ -70,7 +70,7 @@
 	</div>
 	<div id="profile-edit">
 		<form action="" name="profile-edit-form" method="post" enctype="multipart/form-data" novalidate>
-			{{ editform.csrf_token }}
+			{{ edit_form.csrf_token }}
 			<div>
 				{{ edit_form.name.label(class_="name-label-edit")}}
 				{{ edit_form.name(class_="name-edit") }}
