@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileAllowed
+from flask_wtf.file import FileRequired, FileAllowed
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, MultipleFileField, BooleanField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
+from wtforms.fields import FileField
 from app.models import User
 
 class LoginForm(FlaskForm):
@@ -80,4 +81,13 @@ class ProductsFormAdmin(FlaskForm):
 class OrdersFormAdmin(FlaskForm):
     name = StringField("Enter the order name")
     types = SelectField("Enter what to do", validators=[DataRequired()], choices=[('list', 'List'), ('del', 'Delete'), ('complete', 'Complete')])
+    submit2 = SubmitField("Submit")
+
+class UsersFormAdmin(FlaskForm):
+    username = StringField("Enter the username*", validators=[DataRequired()])
+    submit3 = SubmitField("Submit")
+
+class EditForm(FlaskForm):
+    name = StringField("Enter name: ")
+    profileimg = FileField('Select a profile image', validators=[FileAllowed(['jpg', 'png'], 'Images only!')])
     submit2 = SubmitField("Submit")

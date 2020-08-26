@@ -1,9 +1,10 @@
 from flask import render_template, flash, redirect, request
 from app import app, db
-from app.forms import LoginForm, SignUpForm, CancelForm, BasicAppForm, ComplexAppForm, FrontEndForm, DatabaseForm, CMSForm, CDForm, SupportForm, ProductsFormAdmin, OrdersFormAdmin
+from app.forms import LoginForm, SignUpForm, CancelForm, BasicAppForm, ComplexAppForm, FrontEndForm, DatabaseForm, CMSForm, CDForm, SupportForm, ProductsFormAdmin, OrdersFormAdmin, EditForm
 from app.models import User, Products, Orders
 from app.email import send_mail
 from flask_login import current_user, login_user, logout_user, login_required
+from werkzeug.utils import secure_filename
 from werkzeug.urls import url_parse
 import os
 import io
@@ -164,34 +165,56 @@ def register():
 @app.route('/account/<username>', methods=['GET', 'POST'])
 @login_required
 def user(username):
+	user = User.query.filter_by(username=username).first_or_404()
+	cancelform = CancelForm(prefix="a")
+	editform = EditForm(request.form, prefix="b")
 	if current_user.email not in ['dyoung8765@gmail.com', 'officialfoxtail@gmail.com', '']: 
-		user = User.query.filter_by(username=username).first_or_404()
-		form = CancelForm()
-		if form.validate_on_submit():
-			order = user.orders.filter_by(order_name=form.confirm.data).first_or_404()
+		if cancelform.submit.data and cancelform.validate():
+			order = user.orders.filter_by(order_name=cancelform.confirm.data).first_or_404()
 			order.order_flag = 'cancelled'
 			db.session.add(order)
 			db.session.commit()
-			send_mail(f"{form.confirm.data} cancelled", current_user.email, ['officialfoxtail@gmail.com'], f"{form.confirm.data} has been cancelled")
+			send_mail(f"{cancelform.confirm.data} cancelled", current_user.email, ['officialfoxtail@gmail.com'], f"{cancelform.confirm.data} has been cancelled")
+
+		if editform.submit2.data and editform.validate():
+			if editform.name.data:
+				user.username = editform.name.data
+			if editform.profileimg.data:
+				file = request.files.get(editform.profileimg.name)
+				filename = secure_filename(file.filename)
+
+				file.save(app.config['UPLOAD_FOLDER'] + filename)
+
+				
+				user.profile_img = '/static/profile_imgs/' + filename
+				db.session.add(user)
+				db.session.commit()
+
 		ordered = user.orders.filter_by(order_flag='open')
 		cancels = user.orders.filter_by(order_flag='cancelled')
 		completed = user.orders.filter_by(order_flag='completed')
 
-		return render_template('user.html', user=user, opens=ordered, cancels=cancels, completed=completed, form=form, isAdmin=False)
+		return render_template('user.html', user=user, opens=ordered, cancels=cancels, completed=completed, cancelform=cancelform, editform=editform, isAdmin=False)
 	else:
-		user = User.query.filter_by(username=username).first_or_404()
-		form = CancelForm()
-		if form.validate_on_submit():
-			order = user.orders.filter_by(order_name=form.confirm.data).first_or_404()
+		if cancelform.submit.data and cancelform.validate():
+			order = user.orders.filter_by(order_name=cancelform.confirm.data).first_or_404()
 			order.order_flag = 'cancelled'
 			db.session.add(order)
 			db.session.commit()
-			send_mail(f"{form.confirm.data} cancelled", current_user.email, ['officialfoxtail@gmail.com'], f"{form.confirm.data} has been cancelled")
+			send_mail(f"{cancelform.confirm.data} cancelled", current_user.email, ['officialfoxtail@gmail.com'], f"{cancelform.confirm.data} has been cancelled")
+		if editform.submit2.data and editform.validate():
+			user.username = editform.name.data
+			filename = secure_filename(editform.profileimg.data.filename)
+			print(filename)
+			editform.profileimg.data.save('./static/profile_imgs/' + filename)
+			user.profile_img = './static/profile_imgs/' + filename
+
+			return redirect('/account/<username>')
 		ordered = user.orders.filter_by(order_flag='open')
 		cancels = user.orders.filter_by(order_flag='cancelled')
 		completed = user.orders.filter_by(order_flag='completed')
 
-		return render_template('user.html', user=user, opens=ordered, cancels=cancels, completed=completed, form=form, isAdmin=True)
+		return render_template('user.html', user=user, opens=ordered, cancels=cancels, completed=completed, cancel_form=cancelform, edit_form=editform, isAdmin=True)
 
 @app.route('/service', methods=['GET', 'POST'])
 def support():

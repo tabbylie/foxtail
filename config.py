@@ -1,4 +1,5 @@
 import os
+from os.path import join, dirname, realpath
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
@@ -10,6 +11,8 @@ class Config(object):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['officialfoxtail@gmail.com']
+
+    UPLOAD_FOLDER = os.path.join(basedir, 'app/static/profile_imgs/')
 
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
     	'sqlite:///' + os.path.join(basedir, 'tail.db')
