@@ -214,6 +214,7 @@ def user(username):
 				user.profile_img = '/static/profile_imgs/' + filename
 				db.session.add(user)
 				db.session.commit()
+				print(user.profile_img)
 		ordered = user.orders.filter_by(order_flag='open')
 		cancels = user.orders.filter_by(order_flag='cancelled')
 		completed = user.orders.filter_by(order_flag='completed')
