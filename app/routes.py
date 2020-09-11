@@ -121,7 +121,7 @@ def success():
 			<h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">Your order has been placed!<br>Click <a href="/">here</a> to go to homepage</h1>
 			<script>
 				setTimeout(() => {
-					window.location.href = '{{ url_for("index") }}';
+					window.location.href = '/';
 				}, 2000);
 			</script>
 		</body>
