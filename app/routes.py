@@ -23,7 +23,7 @@ def products():
 	product = Products.query.all()
 	return render_template('products.html', title="Products", products=product)
 
-@app.route('/customize/Front end', methods=['GET', 'POST'])
+@app.route('/customize/Front End', methods=['GET', 'POST'])
 @login_required
 def front_end():
 	form = FrontEndForm(request.form)
