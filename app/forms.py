@@ -29,6 +29,10 @@ class SignUpForm(FlaskForm):
         if user is not None:
             raise ValidationError('Please use a different email address.')
 
+class ResetPasswordForm(FlaskForm):
+    email = StringField('Enter your email*', validators=[DataRequired(), Email()])
+    submit = SubmitField('Submit')
+
 class CancelForm(FlaskForm):
     confirm = StringField('Confirm Order Name', validators=[DataRequired()])
     submit = SubmitField('Cancel it')

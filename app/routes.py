@@ -1,8 +1,8 @@
-from flask import render_template, flash, redirect, request
+from flask import render_template, flash, redirect, request, url_for
 from app import app, db
-from app.forms import LoginForm, SignUpForm, CancelForm, BasicAppForm, ComplexAppForm, FrontEndForm, DatabaseForm, CMSForm, CDForm, SupportForm, ProductsFormAdmin, OrdersFormAdmin, EditForm
+from app.forms import LoginForm, SignUpForm, ResetPasswordForm, CancelForm, BasicAppForm, ComplexAppForm, FrontEndForm, DatabaseForm, CMSForm, CDForm, SupportForm, ProductsFormAdmin, OrdersFormAdmin, UsersFormAdmin, EditForm
 from app.models import User, Products, Orders
-from app.email import send_mail
+from app.email import send_mail, send_password_reset_email
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.utils import secure_filename
 from werkzeug.urls import url_parse
@@ -23,11 +23,10 @@ def products():
 	product = Products.query.all()
 	return render_template('products.html', title="Products", products=product)
 
-@app.route('/customize/Front End', methods=['GET', 'POST'])
+@app.route('/customize/Front end', methods=['GET', 'POST'])
 @login_required
 def front_end():
 	form = FrontEndForm(request.form)
-	print(f'{form.validate_on_submit()}')
 	if request.method == 'POST' and form.validate():
 		user = User.query.filter_by(username=current_user.username).first_or_404()
 		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data, author=user)
@@ -63,7 +62,7 @@ def complex_desktop_app():
 		order = Orders(order_name=form.order_name.data, order_desc=form.order_description.data, author=user)
 		db.session.add(order)
 		db.session.commit()
-		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com'], f"Client Email: {current_user.email}\nDescription of project: {form.order_description.data}\nExamples: {form.order_examps.data}")
+		send_mail(form.order_name.data, current_user.email, ['officialfoxtail@gmail.com', current_user.email], f"Client Email: {current_user.email}\nDescription of project: {form.order_description.data}\nExamples: {form.order_examps.data}")
 		return redirect('/success')
 	return render_template('complexapp.html', title='Complex App', form=form)
 
@@ -120,10 +119,27 @@ def success():
 		</title>
 		<body>
 			<h1 style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">Your order has been placed!<br>Click <a href="/">here</a> to go to homepage</h1>
+			<script>
+				setTimeout(() => {
+					window.location.href = '{{ url_for("index") }}';
+				}, 2000);
+			</script>
 		</body>
 	</html>
 	'''
 
+@app.route('/reset_password', methods=['GET', 'POST'])
+def reset_password():
+	if current_user.is_authenticated:
+		return redirect('/')
+	form = ResetPasswordForm()
+	if form.validate_on_submit():
+		user = User.query.filter_by(email=form.email.data).first()
+		if user:
+			send_password_reset_email(user)
+		flash('Check your email for instructions to reset your password')
+		return redirect('/account/login')
+	return render_template('reset_password.html', form=form)
 @app.route('/account/login', methods=['GET', 'POST'])
 def login():
 	if current_user.is_authenticated:
@@ -159,6 +175,7 @@ def register():
 		user.set_password(form.password.data)
 		db.session.add(user)
 		db.session.commit()
+		
 		return redirect('/account/login')
 	return render_template('signup.html', title="sign up", form=form)
 
@@ -194,7 +211,7 @@ def user(username):
 		cancels = user.orders.filter_by(order_flag='cancelled')
 		completed = user.orders.filter_by(order_flag='completed')
 
-		return render_template('user.html', user=user, opens=ordered, cancels=cancels, completed=completed, cancelform=cancelform, editform=editform, isAdmin=False)
+		return render_template('user.html', user=user, opens=ordered, cancels=cancels, completed=completed, cancel_form=cancelform, edit_form=editform, isAdmin=False)
 	else:
 		if cancelform.submit.data and cancelform.validate():
 			order = user.orders.filter_by(order_name=cancelform.confirm.data).first_or_404()
@@ -205,7 +222,6 @@ def user(username):
 		if editform.submit2.data and editform.validate():
 			if editform.name.data:
 				user.username = editform.name.data
-			print(editform.profileimg.data)
 			if editform.profileimg.data:
 				file = request.files.get(editform.profileimg.name)
 				filename = secure_filename(file.filename)
@@ -215,7 +231,6 @@ def user(username):
 				user.profile_img = '/static/profile_imgs/' + filename
 				db.session.add(user)
 				db.session.commit()
-				print(user.profile_img)
 		ordered = user.orders.filter_by(order_flag='open')
 		cancels = user.orders.filter_by(order_flag='cancelled')
 		completed = user.orders.filter_by(order_flag='completed')
@@ -241,17 +256,17 @@ def tos():
 
 @app.route('/admin_panel', methods=['GET', 'POST'])
 def admin_panel():
-	print(current_user.email)
 	if current_user.email in ['dyoung8765@gmail.com', 'officialfoxtail@gmail.com']:
 		productsform = ProductsFormAdmin()
 		ordersform = OrdersFormAdmin()
+		usersform = UsersFormAdmin()
 		if productsform.submit1.data and productsform.validate():
 			if productsform.type_.data == 'list_':
 				products = Products.query.all()
 				arr = []
 				for product in products:
 					arr.append(product)
-				return render_template('admin_panel.html', title="Admin Panel", products=productsform, products_arr=arr, orders=ordersform)
+				return render_template('admin_panel.html', title="Admin Panel", products=productsform, products_arr=arr, orders=ordersform, users=usersform)
 			if productsform.type_.data == 'add_':
 				try:
 					int(productsform.price.data)
@@ -268,7 +283,7 @@ def admin_panel():
 					db.session.commit()
 					return redirect('/admin_panel')
 				else:
-					return render_template('admin_panel.html', title='Admin Panel', products=productsform, products_arr=[f'Error! {productsform.name.data} does not exist'], orders=ordersform)
+					return render_template('admin_panel.html', title='Admin Panel', products=productsform, products_arr=[f'Error! {productsform.name.data} does not exist'], orders=ordersform, users=usersform)
 			
 		if ordersform.submit2.data and ordersform.validate():
 			if ordersform.types.data == 'list':
@@ -276,7 +291,7 @@ def admin_panel():
 				arr = []
 				for order in orders:
 					arr.append(order)
-				return render_template('admin_panel.html', title="Admin Panel", products=productsform, orders=ordersform, orders_arr=arr)
+				return render_template('admin_panel.html', title="Admin Panel", products=productsform, orders=ordersform, orders_arr=arr, users=usersform)
 			if ordersform.types.data == 'del':
 				order = Orders.query.filter_by(order_name=ordersform.name.data).first()
 				if order != None:
@@ -284,7 +299,7 @@ def admin_panel():
 					db.session.commit()
 					return redirect('/admin_panel')
 				else:
-					return render_template('admin_panel.html', title='Admin Panel', products=productsform, orders_arr=[f'Error! {ordersform.name.data} does not exist'], orders=ordersform)
+					return render_template('admin_panel.html', title='Admin Panel', products=productsform, orders_arr=[f'Error! {ordersform.name.data} does not exist'], orders=ordersform, users=usersform)
 			if ordersform.types.data == 'complete':
 				order = Orders.query.filter_by(order_name=ordersform.name.data).first()
 				if order != None:
@@ -292,8 +307,12 @@ def admin_panel():
 					db.session.add(order)
 					db.session.commit()
 				else:
-					return render_template('admin_panel.html', title='Admin Panel', products=productsform, orders_arr=[f'Error! {ordersform.name.data} does not exist'], orders=ordersform)
-
-		return render_template('admin_panel.html', title="Admin Panel", products=productsform, orders=ordersform)
+					return render_template('admin_panel.html', title='Admin Panel', products=productsform, orders_arr=[f'Error! {ordersform.name.data} does not exist'], orders=ordersform, users=usersform)
+		
+		if usersform.submit3.data and usersform.validate():
+			user = User.query.filter_by(username=usersform.username.data).first()
+			
+			return render_template('admin_panel.html', title='Admin Panel', products=productsform, orders=ordersform, users=usersform, user=user)
+		return render_template('admin_panel.html', title="Admin Panel", products=productsform, orders=ordersform, users=usersform)
 	else:
 		return render_template('404.html'), 404

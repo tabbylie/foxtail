@@ -2,6 +2,14 @@ from flask_mail import Message
 from app import app, mail
 import threading
 
+def send_password_reset_email(user):
+    token = user.get_reset_password_token()
+    send_mail('[FOXTAIL] Password Reset',
+        sender=app.config['ADMINS'][0], recipients=[user.email],
+         text_body=render_template(app.config['EMAIL_TEXT_TEMPLATE_FOLDER'] + 'password_reset.txt', user=user, token=token),
+         html_body=render_template(app.config['EMAIL_HTML_TEMPLATE_FOLDER'] + 'password_reset.html', user=user, token=token)
+    )
+    
 def send_async_email(app, msg):
     with app.app_context():
         mail.send(msg)

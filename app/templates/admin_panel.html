@@ -1,71 +1,89 @@
-{% extends 'base.html' %}
-{% block content %}
-    <div id="container-admin">
-        <div id="product-wrapper">
-            <h1 style="text-align: center;">Products</h1>
-            <form action="" method="POST" novalidate>
-                {{ products.hidden_tag() }}
-                <div>
-                    {{ products.name.label(class_="products-name-label-admin") }}
-                    {{ products.name(size=20, class_="products-name-admin", placeholder="Product name") }}
-                    {% for error in products.name.errors %}
-                        <span style="color: red;">[{{ error }}]</span>
-                    {% endfor %}
-                </div>
-                <div>
-                    {{ products.desc.label(class_="products-desc-label-admin") }}
-                    {{ products.desc(size=20, class_="products-desc-admin", placeholder="Description of product") }}
-                    {% for error in products.desc.errors %}
-                        <span style="color: red;">[{{ error }}]</span>
-                    {% endfor %}
-                </div>
-                <div>
-                    {{ products.price.label(class_="products-price-label-admin") }}
-                    {{ products.price(class_="products-price-admin", placeholder="Price of product") }}
-                    {% for error in products.desc.errors %}
-                        <span style="color: red;">[{{ error }}]</span>
-                    {% endfor %}
-                </div>
-                <div>
-                    {{ products.type_(class_="products-type-admin") }}
-                </div>
-                {{ products.submit1(class_="products-submit-admin") }}
-            </form>
-            {% if products_arr %}
-                <div id="products-array">
-                    <ol>
-                        {% for product in products_arr %}
-                            <li>{{ product }}</li>
-                        {% endfor %}
-                    </ol>
-                </div>
-            {% endif %}
-        </div>
-        <div id="orders-wrapper">
-            <h1 style="text-align: center;">Orders</h1>
-            <form action="" method="POST" novalidate>
-                {{ orders.hidden_tag() }}
-                <div>
-                    {{ orders.name.label(class_="products-name-label-admin") }}
-                    {{ orders.name(size=20, class_="products-name-admin", placeholder="Product name") }}
-                    {% for error in orders.name.errors %}
-                        <span style="color: red;">[{{ error }}]</span>
-                    {% endfor %}
-                </div>
-                <div>
-                    {{ orders.types(class_="products-type-admin") }}
-                </div>
-                {{ orders.submit2(class_="products-submit-admin") }}
-            </form>
-            {% if orders_arr %}
-                <div id="orders-array">
-                    <ol>
-                        {% for product in orders_arr %}
-                            <li>{{ product }}</li>
-                        {% endfor %}
-                    </ol>
-                </div>
-            {% endif %}
-        </div>
-    </div>
+{% extends 'base.html' %} {% block content %}
+<div id="container-admin">
+  <div id="product-wrapper">
+    <h1 style="text-align: center">Products</h1>
+    <form action="" method="POST" novalidate>
+      {{ products.hidden_tag() }}
+      <div>
+        {{ products.name.label(class_="products-name-label-admin") }} {{
+        products.name(size=20, class_="products-name-admin",
+        placeholder="Product name") }} {% for error in products.name.errors %}
+        <span style="color: red">[{{ error }}]</span>
+        {% endfor %}
+      </div>
+      <div>
+        {{ products.desc.label(class_="products-desc-label-admin") }} {{
+        products.desc(size=20, class_="products-desc-admin",
+        placeholder="Description of product") }} {% for error in
+        products.desc.errors %}
+        <span style="color: red">[{{ error }}]</span>
+        {% endfor %}
+      </div>
+      <div>
+        {{ products.price.label(class_="products-price-label-admin") }} {{
+        products.price(class_="products-price-admin", placeholder="Price of
+        product") }} {% for error in products.desc.errors %}
+        <span style="color: red">[{{ error }}]</span>
+        {% endfor %}
+      </div>
+      <div>{{ products.type_(class_="products-type-admin") }}</div>
+      {{ products.submit1(class_="products-submit-admin") }}
+    </form>
+  </div>
+  <div id="orders-wrapper">
+    <h1 style="text-align: center">Orders</h1>
+    <form action="" method="POST" novalidate>
+      {{ orders.hidden_tag() }}
+      <div>
+        {{ orders.name.label(class_="products-name-label-admin") }} {{
+        orders.name(size=20, class_="products-name-admin", placeholder="Product
+        name") }} {% for error in orders.name.errors %}
+        <span style="color: red">[{{ error }}]</span>
+        {% endfor %}
+      </div>
+      <div>{{ orders.types(class_="products-type-admin") }}</div>
+      {{ orders.submit2(class_="products-submit-admin") }}
+    </form>
+  </div>
+  <div id="users-wrapper">
+    <h1 style="text-align: center">Users</h1>
+    <form action="" method="post" novalidate>
+      {{ orders.hidden_tag() }}
+      <div>
+        {{ users.username.label(class_="users-username-label-admin") }} {{
+        users.username(class_="users-username-admin", placeholder="Enter a
+        username") }}
+      </div>
+      {{users.submit3(class_="users-submit-admin") }}
+    </form>
+  </div>
+  <table id="admin-table">
+    {% if user %}
+    <tr>
+      <td>Username</td>
+      <td>Email</td>
+      <td>Password_hash</td>
+      <td>profile_img</td>
+    </tr>
+    <tr>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.password_hash }}</td>
+      <td>{{ user.profile_img }}</td>
+    </tr>
+    {% endif %} {% if orders_arr %}
+    <tr>
+      {% for product in orders_arr %}
+      <td>{{ product }}</td>
+      {% endfor %}
+    </tr>
+    {% endif %} {% if products_arr %}
+    <tr>
+      {% for product in products_arr %}
+      <li>{{ product }}</li>
+      {% endfor %}
+    </tr>
+    {% endif %}
+  </table>
+</div>
 {% endblock %}

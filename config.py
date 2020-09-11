@@ -13,6 +13,8 @@ class Config(object):
     ADMINS = ['officialfoxtail@gmail.com']
 
     UPLOAD_FOLDER = os.path.join(basedir, 'app/static/profile_imgs/')
+    EMAIL_TEXT_TEMPLATE_FOLDER = os.path.join(basedir, 'app/static/email/')
+    EMAIL_HTML_TEMPLATE_FOLDER = os.path.join(basedir, 'app/templates/email_templates/')
 
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
     	'sqlite:///' + os.path.join(basedir, 'tail.db')
