@@ -9,3 +9,5 @@ tail.db
 foxtail
 server.csr
 server.key
+.env
+/.vscode/
