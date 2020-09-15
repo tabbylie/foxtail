@@ -55,24 +55,30 @@
         users.username(class_="users-username-admin", placeholder="Enter a
         username") }}
       </div>
+      <div>{{ users.types }}</div>
       {{users.submit3(class_="users-submit-admin") }}
     </form>
   </div>
   <table id="admin-table">
-    {% if user %}
+    {% if userd %}
     <tr>
       <td>Username</td>
       <td>Email</td>
       <td>Password_hash</td>
       <td>profile_img</td>
     </tr>
+    {% if userd[0] == "err" %}
+    <tr>
+      <td>{{ userd[1] }}</td>
+    </tr>
+    {% else %} {% for user in userd %}
     <tr>
       <td>{{ user.username }}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.password_hash }}</td>
       <td>{{ user.profile_img }}</td>
     </tr>
-    {% endif %} {% if orders_arr %}
+    {% endfor %} {% endif %} {% endif %} {% if orders_arr %}
     <tr>
       {% for product in orders_arr %}
       <td>{{ product }}</td>

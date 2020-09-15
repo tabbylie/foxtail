@@ -111,7 +111,12 @@ class OrdersFormAdmin(FlaskForm):
 
 
 class UsersFormAdmin(FlaskForm):
-    username = StringField("Enter the username*", validators=[DataRequired()])
+    username = StringField("Enter the username")
+    types = SelectField(
+        "Enter what you wanna do",
+        validators=[DataRequired()],
+        choices=[("list", "List"), ("search", "Search"), ('delete', 'Delete')],
+    )
     submit3 = SubmitField("Submit")
 
 

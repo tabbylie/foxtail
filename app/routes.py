@@ -373,16 +373,57 @@ def admin_panel():
                     )
 
         if usersform.submit3.data and usersform.validate():
-            user = User.query.filter_by(username=usersform.username.data).first()
-
-            return render_template(
-                "admin_panel.html",
-                title="Admin Panel",
-                products=productsform,
-                orders=ordersform,
-                users=usersform,
-                user=user,
-            )
+            if usersform.types.data == "search":
+                user = User.query.filter_by(username=usersform.username.data).first()
+                if not user:
+                    return render_template(
+                        "admin_panel.html",
+                        title="Admin Panel",
+                        products=productsform,
+                        orders=ordersform,
+                        users=usersform,
+                        userd=["err", "Error! User not found!"],
+                    )
+                user = [user]
+                return render_template(
+                    "admin_panel.html",
+                    title="Admin Panel",
+                    products=productsform,
+                    orders=ordersform,
+                    users=usersform,
+                    userd=user,
+                )
+            if usersform.types.data == "list":
+                user = User.query.all()
+                return render_template(
+                    "admin_panel.html",
+                    title="Admin Panel",
+                    products=productsform,
+                    orders=ordersform,
+                    users=usersform,
+                    userd=user,
+                )
+            if usersform.types.data == "delete":
+                user = User.query.filter_by(username=usersform.username.data).first()
+                if not user:
+                    return render_template(
+                        "admin_panel.html",
+                        title="Admin Panel",
+                        products=productsform,
+                        orders=ordersform,
+                        users=usersform,
+                        userd=["err", "Error! User not found!"],
+                    )
+                db.session.delete(user)
+                db.session.commit()
+                return render_template(
+                    "admin_panel.html",
+                    title="Admin Panel",
+                    products=productsform,
+                    orders=ordersform,
+                    users=usersform,
+                    userd=["err", "${user} has been removed"],
+                )
         return render_template(
             "admin_panel.html",
             title="Admin Panel",
