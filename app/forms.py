@@ -8,8 +8,16 @@ from wtforms import (
     SelectField,
     MultipleFileField,
     BooleanField,
+    DecimalField,
 )
-from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
+from wtforms.validators import (
+    DataRequired,
+    Email,
+    Length,
+    EqualTo,
+    ValidationError,
+    Optional,
+)
 from wtforms.fields import FileField
 from app.models import User
 
@@ -60,47 +68,6 @@ class CancelForm(FlaskForm):
     submit = SubmitField("Cancel it")
 
 
-class BasicAppForm(FlaskForm):
-    order_name = StringField("Name of Application*", validators=[DataRequired()])
-    order_description = StringField(
-        "Describe your application*", validators=[DataRequired()]
-    )
-    order_examps = StringField("Example Applications (if any)")
-    submit = SubmitField("Submit order")
-
-
-class ComplexAppForm(FlaskForm):
-    order_name = StringField("Name of Application*", validators=[DataRequired()])
-    order_description = StringField(
-        "Describe your Application*", validators=[DataRequired()]
-    )
-    order_examps = StringField("Example applications (if any)")
-    submit = SubmitField("Submit order")
-
-
-class FrontEndForm(FlaskForm):
-    order_name = StringField("Order Name*", validators=[DataRequired()])
-    order_description = StringField(
-        "Describe the purpose*", validators=[DataRequired()]
-    )
-    design_or_no = MultipleFileField("Have a design?")
-    submit = SubmitField("Submit order")
-
-
-class DatabaseForm(FlaskForm):
-    order_name = StringField("Order name*", validators=[DataRequired()])
-    order_description = StringField("Describe its use*", validators=[DataRequired()])
-    submit = SubmitField("Submit order")
-
-
-class CMSForm(FlaskForm):
-    order_name = StringField("Order name*", validators=[DataRequired()])
-    order_description = StringField(
-        "Describe its purpose*", validators=[DataRequired()]
-    )
-    submit = SubmitField("Submit order")
-
-
 class CustomizeForm(FlaskForm):
     order_name = StringField("Order Name*", validators=[DataRequired()])
     order_description = StringField("Describe your Order*", validators=[DataRequired()])
@@ -124,17 +91,17 @@ class SupportForm(FlaskForm):
 class ProductsFormAdmin(FlaskForm):
     name = StringField("Enter the name")
     desc = StringField("Enter the description")
-    price = StringField("Enter the price")
-    type_ = SelectField(
-        "Enter a type",
+    price = DecimalField("Enter the price", validators=[Optional()])
+    types = SelectField(
+        "Enter what to do",
         validators=[DataRequired()],
-        choices=[("list_", "List"), ("add_", "Add"), ("del_", "Delete")],
+        choices=[("list", "List"), ("add", "Add"), ("del", "Delete")],
     )
     submit1 = SubmitField("Submit")
 
 
 class OrdersFormAdmin(FlaskForm):
-    name = StringField("Enter the order name")
+    order_name = StringField("Enter the order name")
     types = SelectField(
         "Enter what to do",
         validators=[DataRequired()],
@@ -150,8 +117,5 @@ class UsersFormAdmin(FlaskForm):
 
 class EditForm(FlaskForm):
     name = StringField("Enter name: ")
-    profileimg = FileField(
-        "Select a profile image",
-        validators=[FileAllowed(["jpg", "png"], "Images only!")],
-    )
+    profileimg = FileField("Select a profile image")
     submit2 = SubmitField("Submit")

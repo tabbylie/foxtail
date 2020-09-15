@@ -1,30 +1,31 @@
-{% extends 'base.html' %}
-{% block content %}
-    <div id="container-cd">
-        <form action="" method="POST" novalidate autocomplete="off" enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
-            <div class="name-div-cd">
-                {{ form.order_name.label(class_="order-name-label-cd") }}
-                {{ form.order_name(size=20, class_="order-name-cd", placeholder="Project name") }}
-                {% for error in form.order_name.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </div>
-            <div class="desc-div-cd">
-                {{ form.order_description.label(class_="order-desc-label-cd") }}
-                {{ form.order_description(size=20, class_="order-desc-cd", placeholder="Description of project") }}
-                {% for error in form.order_description.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </div>
-            <div class="design-div-cd">
-                {{ form.order_reference.label(class_="order_reference-label-cd") }}
-                {{ form.order_reference(class_="order_reference-cd")}}
-                {% for error in form.order_reference.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </div>
-            {{ form.submit(class_="order-submit-cd") }}
-        </form>
-    </div>
+{% extends 'base.html' %} {% block content %}
+<div id="customize-container">
+  <div id="customize-wrapper">
+    <form action="" method="POST" novalidate>
+      {{ form.hidden_tag() }}
+      <div>
+        {{ form.order_name.label() }} {{
+        form.order_name(class_="customize_product", placeholder="Order Name") }}
+        {% for error in form.order_name.errors %}
+        <span style="color: red">[{{ error }}]</span>
+        {% endfor %}
+      </div>
+      <div>
+        {{ form.order_description.label() }} {{
+        form.order_description(class_="customize_product", placeholder="Order
+        Description") }} {% for error in form.order_description.errors %}
+        <span style="color: red">[{{ error }}]</span>
+        {% endfor %}
+      </div>
+      <div>
+        {{ form.order_reference.label() }}
+        {{form.order_reference(class_="customize_reference")}} 
+        {%for error in form.order_reference.errors%}
+        <span style="color: red">[{{ error }}]</span>
+        {% endfor %}
+      </div>
+      <div>{{ form.submit(class_="customize-submit") }}</div>
+    </form>
+  </div>
+</div>
 {% endblock %}

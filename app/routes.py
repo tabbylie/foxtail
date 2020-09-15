@@ -5,12 +5,6 @@ from app.forms import (
     SignUpForm,
     ResetPasswordForm,
     CancelForm,
-    BasicAppForm,
-    ComplexAppForm,
-    FrontEndForm,
-    DatabaseForm,
-    CMSForm,
-    # CDForm,
     SupportForm,
     ProductsFormAdmin,
     OrdersFormAdmin,
@@ -45,7 +39,7 @@ def products():
     return render_template("products.html", title="Products", products=product)
 
 
-@app.route("/customize/<product>")
+@app.route("/customize/<product>", methods=["GET", "POST"])
 @login_required
 def customize_product(product):
     form = CustomizeForm()
@@ -60,7 +54,7 @@ def customize_product(product):
         )
         db.session.add(order)
         db.session.commit()
-        files = request.files.getlist(form.design_or_no.name)
+        files = request.files.getlist(form.order_reference.name)
         if len(files) != 0:
             attachments = []
             for file in files:
@@ -81,156 +75,6 @@ def customize_product(product):
         title=product,
         form=form,
     )
-
-
-# @app.route("/customize/Front End", methods=["GET", "POST"])
-# @login_required
-# def front_end():
-#     form = FrontEndForm(request.form)
-#     if request.method == "POST" and form.validate():
-#         user = User.query.filter_by(username=current_user.username).first_or_404()
-#         order = Orders(
-#             order_name=form.order_name.data,
-#             order_desc=form.order_description.data,
-#             author=user,
-#         )
-#         db.session.add(order)
-#         db.session.commit()
-#         files = request.files.getlist(form.design_or_no.name)
-#         attachments = []
-#         for file in files:
-#             attachments.append(file.stream.read())
-#         send_mail(
-#             form.order_name.data,
-#             current_user.email,
-#             ["officialfoxtail@gmail.com"],
-#             f"Client Email: {current_user.email}\ndescription of project: {form.order_description.data}",
-#             None,
-#             attachments,
-#         )
-#         return redirect("/success")
-#     return render_template("frontend.html", title="Front End", form=form)
-
-
-# @app.route("/customize/Basic Desktop App", methods=["GET", "POST"])
-# @login_required
-# def basic_desktop_app():
-#     form = BasicAppForm()
-#     if form.validate_on_submit():
-#         user = User.query.filter_by(username=current_user.username).first_or_404()
-#         order = Orders(
-#             order_name=form.order_name.data,
-#             order_desc=form.order_description.data,
-#             author=user,
-#         )
-#         db.session.add(order)
-#         db.session.commit()
-#         send_mail(
-#             form.order_name.data,
-#             current_user.email,
-#             ["officialfoxtail@gmail.com"],
-#             f"Client Email: {current_user.email}\nName of project: {form.order_name.data}\nDescription of project: {form.order_description.data}\nExamples: {form.order_examps.data}",
-#         )
-#         return redirect("/success")
-#     return render_template("basicapp.html", title="Basic App", form=form)
-
-
-# @app.route("/customize/Complex Desktop App", methods=["GET", "POST"])
-# @login_required
-# def complex_desktop_app():
-#     form = ComplexAppForm()
-#     if form.validate_on_submit():
-#         user = User.query.filter_by(username=current_user.username).first_or_404()
-#         order = Orders(
-#             order_name=form.order_name.data,
-#             order_desc=form.order_description.data,
-#             author=user,
-#         )
-#         db.session.add(order)
-#         db.session.commit()
-#         send_mail(
-#             form.order_name.data,
-#             current_user.email,
-#             ["officialfoxtail@gmail.com", current_user.email],
-#             f"Client Email: {current_user.email}\nDescription of project: {form.order_description.data}\nExamples: {form.order_examps.data}",
-#         )
-#         return redirect("/success")
-#     return render_template("complexapp.html", title="Complex App", form=form)
-
-
-# @app.route("/customize/Concept Design", methods=["GET", "POST"])
-# @login_required
-# def Concept_Design():
-#     form = CDForm()
-#     if form.validate_on_submit():
-#         user = User.query.filter_by(username=current_user.username).first_or_404()
-#         order = Orders(
-#             order_name=form.order_name.data,
-#             order_desc=form.order_description.data,
-#             author=user,
-#         )
-#         db.session.add(order)
-#         db.session.commit()
-#         files = request.files.getlist(form.order_reference.name)
-#         attachments = []
-#         for file in files:
-#             attachments.append(file.stream.read())
-#         send_mail(
-#             form.order_name.data,
-#             current_user.email,
-#             ["cierraccontact@gmail.com"],
-#             f"Client Email: {current_user.email}\nDescription of project: {form.order_description.data}",
-#             None,
-#             attachments,
-#         )
-#         return redirect("/success")
-#     return render_template("concept.html", title="Concept Design", form=form)
-
-
-# @app.route("/customize/Database", methods=["GET", "POST"])
-# @login_required
-# def database():
-#     form = DatabaseForm()
-#     if form.validate_on_submit():
-#         user = User.query.filter_by(username=current_user.username).first_or_404()
-#         order = Orders(
-#             order_name=form.order_name.data,
-#             order_desc=form.order_description.data,
-#             author=user,
-#         )
-#         db.session.add(order)
-#         db.session.commit()
-#         send_mail(
-#             form.order_name.data,
-#             current_user.email,
-#             ["officialfoxtail@gmail.com"],
-#             f"Client Email: {current_user.email}\ndescription of database: {form.order_description.data}",
-#         )
-#         return redirect("/success")
-#     return render_template("database.html", title="Database", form=form)
-
-
-# @app.route("/customize/Content Management systems", methods=["GET", "POST"])
-# @login_required
-# def CMS():
-#     form = CMSForm()
-#     if form.validate_on_submit():
-#         user = User.query.filter_by(username=current_user.username).first_or_404()
-#         order = Orders(
-#             order_name=form.order_name.data,
-#             order_desc=form.order_description.data,
-#             author=user,
-#         )
-#         db.session.add(order)
-#         db.session.commit()
-#         send_mail(
-#             form.order_name.data,
-#             current_user.email,
-#             ["officialfoxtail@gmail.com"],
-#             f"Client Email: {current_user.email}\npurpose of CMS: {form.order_description.data}",
-#         )
-#         redirect("/success")
-#     return render_template("cms.html", title="CMS", form=form)
 
 
 @app.route("/success")
@@ -314,82 +158,61 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     cancelform = CancelForm(prefix="a")
     editform = EditForm(request.form, prefix="b")
-    if current_user.email not in [
+
+    if cancelform.submit.data and cancelform.validate():
+        order = user.orders.filter_by(order_name=cancelform.confirm.data).first_or_404()
+        order.order_flag = "cancelled"
+        db.session.add(order)
+        db.session.commit()
+        send_mail(
+            f"{cancelform.confirm.data} cancelled",
+            current_user.email,
+            ["officialfoxtail@gmail.com"],
+            f"{cancelform.confirm.data} has been cancelled",
+        )
+
+    print(editform.errors)
+    if editform.submit2.data and editform.validate():
+        if editform.name.data:
+            user_exists = User.query.filter_by(username=editform.name.data).first()
+            if not user_exists:
+                user.username = editform.name.data
+                db.session.add(user)
+                db.session.commit()
+                return redirect(f"/account/{user.username}")
+            else:
+                flash("Username exists!")
+        print(editform.profileimg.data)
+        file = request.files.get(editform.profileimg.name)
+        print(file)
+        if file:
+            filename = secure_filename(file.filename)
+
+            file_extensions = [".jpg", ".jpeg", ".png"]
+            good = False
+            for file_extension in file_extensions:
+                if filename.endswith(file_extension):
+                    good = True
+
+            if good:
+                file.save(app.config["UPLOAD_FOLDER"] + filename)
+
+                user.profile_img = "/static/profile_imgs/" + filename
+                db.session.add(user)
+                db.session.commit()
+            else:
+                flash("Not an image!")
+        else:
+            print("no!")
+    ordered = user.orders.filter_by(order_flag="open")
+    cancels = user.orders.filter_by(order_flag="cancelled")
+    completed = user.orders.filter_by(order_flag="completed")
+
+    if current_user.email in [
         "dyoung8765@gmail.com",
         "officialfoxtail@gmail.com",
         "",
     ]:
-        if cancelform.submit.data and cancelform.validate():
-            order = user.orders.filter_by(
-                order_name=cancelform.confirm.data
-            ).first_or_404()
-            order.order_flag = "cancelled"
-            db.session.add(order)
-            db.session.commit()
-            send_mail(
-                f"{cancelform.confirm.data} cancelled",
-                current_user.email,
-                ["officialfoxtail@gmail.com"],
-                f"{cancelform.confirm.data} has been cancelled",
-            )
-
-        if editform.submit2.data and editform.validate():
-            if editform.name.data:
-                user.username = editform.name.data
-            if editform.profileimg.data:
-                file = request.files.get(editform.profileimg.name)
-                filename = secure_filename(file.filename)
-
-                file.save(app.config["UPLOAD_FOLDER"] + filename)
-
-                user.profile_img = "/static/profile_imgs/" + filename
-                db.session.add(user)
-                db.session.commit()
-
-        ordered = user.orders.filter_by(order_flag="open")
-        cancels = user.orders.filter_by(order_flag="cancelled")
-        completed = user.orders.filter_by(order_flag="completed")
-
-        return render_template(
-            "user.html",
-            user=user,
-            opens=ordered,
-            cancels=cancels,
-            completed=completed,
-            cancel_form=cancelform,
-            edit_form=editform,
-            isAdmin=False,
-        )
-    else:
-        if cancelform.submit.data and cancelform.validate():
-            order = user.orders.filter_by(
-                order_name=cancelform.confirm.data
-            ).first_or_404()
-            order.order_flag = "cancelled"
-            db.session.add(order)
-            db.session.commit()
-            send_mail(
-                f"{cancelform.confirm.data} cancelled",
-                current_user.email,
-                ["officialfoxtail@gmail.com"],
-                f"{cancelform.confirm.data} has been cancelled",
-            )
-        if editform.submit2.data and editform.validate():
-            if editform.name.data:
-                user.username = editform.name.data
-            if editform.profileimg.data:
-                file = request.files.get(editform.profileimg.name)
-                filename = secure_filename(file.filename)
-
-                file.save(app.config["UPLOAD_FOLDER"] + filename)
-
-                user.profile_img = "/static/profile_imgs/" + filename
-                db.session.add(user)
-                db.session.commit()
-        ordered = user.orders.filter_by(order_flag="open")
-        cancels = user.orders.filter_by(order_flag="cancelled")
-        completed = user.orders.filter_by(order_flag="completed")
-
         return render_template(
             "user.html",
             user=user,
@@ -399,6 +222,17 @@ def user(username):
             cancel_form=cancelform,
             edit_form=editform,
             isAdmin=True,
+        )
+    else:
+        return render_template(
+            "user.html",
+            user=user,
+            opens=ordered,
+            cancels=cancels,
+            completed=completed,
+            cancel_form=cancelform,
+            edit_form=editform,
+            isAdmin=False,
         )
 
 
@@ -434,7 +268,7 @@ def admin_panel():
         ordersform = OrdersFormAdmin()
         usersform = UsersFormAdmin()
         if productsform.submit1.data and productsform.validate():
-            if productsform.type_.data == "list_":
+            if productsform.types.data == "list":
                 products = Products.query.all()
                 arr = []
                 for product in products:
@@ -447,7 +281,7 @@ def admin_panel():
                     orders=ordersform,
                     users=usersform,
                 )
-            if productsform.type_.data == "add_":
+            if productsform.types.data == "add":
                 try:
                     int(productsform.price.data)
                 except:
@@ -468,7 +302,7 @@ def admin_panel():
                 db.session.add(product)
                 db.session.commit()
                 return redirect("/admin_panel")
-            if productsform.type_.data == "del_":
+            if productsform.types.data == "del":
                 Product = Products.query.filter_by(name=productsform.name.data).first()
                 if Product != None:
                     db.session.delete(Product)
@@ -501,7 +335,9 @@ def admin_panel():
                     users=usersform,
                 )
             if ordersform.types.data == "del":
-                order = Orders.query.filter_by(order_name=ordersform.name.data).first()
+                order = Orders.query.filter_by(
+                    order_name=ordersform.order_name.data
+                ).first()
                 if order != None:
                     db.session.delete(order)
                     db.session.commit()
@@ -511,12 +347,16 @@ def admin_panel():
                         "admin_panel.html",
                         title="Admin Panel",
                         products=productsform,
-                        orders_arr=[f"Error! {ordersform.name.data} does not exist"],
+                        orders_arr=[
+                            f"Error! {ordersform.order_name.data} does not exist"
+                        ],
                         orders=ordersform,
                         users=usersform,
                     )
             if ordersform.types.data == "complete":
-                order = Orders.query.filter_by(order_name=ordersform.name.data).first()
+                order = Orders.query.filter_by(
+                    order_name=ordersform.order_name.data
+                ).first()
                 if order != None:
                     order.order_flag = "completed"
                     db.session.add(order)
@@ -526,7 +366,9 @@ def admin_panel():
                         "admin_panel.html",
                         title="Admin Panel",
                         products=productsform,
-                        orders_arr=[f"Error! {ordersform.name.data} does not exist"],
+                        orders_arr=[
+                            f"Error! {ordersform.order_name.data} does not exist"
+                        ],
                         orders=ordersform,
                         users=usersform,
                     )

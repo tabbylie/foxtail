@@ -1021,226 +1021,58 @@
 
 /* Customization styling */
 
-#container-frontend {
-  position: absolute;
+#customize-container {
+  width: 100%;
+  height: 99vh;
+  position: relative;
+}
+
+#customize-wrapper {
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  height: 30%;
+  width: 15%;
   border: 1px solid black;
-  border-radius: 5px;
-  padding: 15px 10px;
+  border-radius: 8px;
   display: flex;
+  flex-flow: column wrap;
   justify-content: center;
-  max-width: 200px;
+  align-items: center;
+  padding: 10px;
 }
 
-.name-div-frontend {
-  padding-bottom: 10px;
+#customize-wrapper div {
+  display: flex;
+  flex-flow: column wrap;
+  margin-top: 10px;
 }
 
-.desc-div-frontend {
-  padding-bottom: 10px;
-}
-
-.design-div-frontend {
-  padding-bottom: 10px;
-}
-
-.order-name-frontend {
+.customize_product {
   border: 1px solid black;
-  margin: 5px 0;
-  padding: 3px 5px;
-  border-radius: 5px;
+  width: 60%;
+  padding: 5px 3px;
+  border-radius: 8px;
+  transition: width 0.3s ease-in-out;
 }
 
-.order-desc-frontend {
-  border: 1px solid black;
-  margin: 5px 0;
-  padding: 3px 5px;
-  border-radius: 5px;
+.customize_product:focus {
+  width: 90%;
 }
 
-.order-design-frontend {
-  border: 1px solid #692705;
-  border-radius: 100px;
-  padding: 1px 5px;
-  transition: 0.3s;
-}
-
-.order-design-frontend:hover {
-  background-color: #d58558;
-  color: white;
-}
-
-.order-submit-frontend {
+.customize-submit {
   position: relative;
   left: 30px;
   background-color: #ff5700;
   color: white;
+  width: 200px;
   border-radius: 100px;
   padding: 5px 10px;
   transition: 0.7s;
 }
 
-.order-submit-frontend:hover {
-  background-color: #d58558;
-  padding: 10px 15px;
-}
-
-#container-basicapp {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 15px 10px;
-  display: flex;
-  justify-content: center;
-  max-width: 250px;
-}
-
-.name-div-basicapp {
-  padding-bottom: 10px;
-}
-
-.desc-div-basicapp {
-  padding-bottom: 10px;
-}
-
-.design-div-basicapp {
-  padding-bottom: 10px;
-}
-
-.order-name-basicapp {
-  border: 1px solid black;
-  margin: 5px 0;
-  padding: 3px 5px;
-  border-radius: 5px;
-  width: 60%;
-  transition: all 0.3s ease-in;
-}
-
-.order-name-basicapp:focus {
-  width: 90%;
-}
-
-.order-desc-basicapp {
-  border: 1px solid black;
-  margin: 5px 0;
-  padding: 3px 5px;
-  border-radius: 5px;
-  width: 60%;
-  transition: all 0.3s ease-in;
-}
-
-.order-desc-basicapp:focus {
-  width: 90%;
-}
-
-.order_examps-basicapp {
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 1px 5px;
-  margin: 5px 0;
-  transition: 0.3s;
-  width: 60%;
-  transition: all 0.3s ease-in;
-}
-
-.order_examps-basicapp:focus {
-  width: 90%;
-}
-
-.order-submit-basicapp {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #ff5700;
-  color: white;
-  border-radius: 100px;
-  padding: 5px 10px;
-  transition: 0.7s;
-}
-
-.order-submit-basicapp:hover {
-  background-color: #d58558;
-  padding: 10px 15px;
-}
-
-#container-cd {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 15px 10px;
-  display: flex;
-  justify-content: center;
-  max-width: 250px;
-}
-
-.name-div-cd {
-  padding-bottom: 10px;
-}
-
-.desc-div-cd {
-  padding-bottom: 10px;
-}
-
-.design-div-cd {
-  padding-bottom: 10px;
-}
-
-.order-name-cd {
-  border: 1px solid black;
-  margin: 5px 0;
-  padding: 3px 5px;
-  border-radius: 5px;
-  width: 60%;
-  transition: all 0.3s ease-in;
-}
-
-.order-name-cd:focus {
-  width: 90%;
-}
-
-.order-desc-cd {
-  border: 1px solid black;
-  margin: 5px 0;
-  padding: 3px 5px;
-  border-radius: 5px;
-  width: 60%;
-  transition: all 0.3s ease-in;
-}
-
-.order-desc-cd:focus {
-  width: 90%;
-}
-
-.order_reference-cd {
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 1px 5px;
-  margin: 5px 0;
-  transition: 0.3s;
-  width: 90%;
-  transition: all 0.3s ease-in;
-}
-
-.order-submit-cd {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #ff5700;
-  color: white;
-  border-radius: 100px;
-  padding: 5px 10px;
-  transition: 0.7s;
-}
-
-.order-submit-cd:hover {
+.customize-submit:hover {
   background-color: #d58558;
   padding: 10px 15px;
 }
@@ -1382,10 +1214,6 @@ p {
   text-align: center;
 }
 
-/* #faq-support h1, #faq-support p {
-    color: #ff5700;
-} */
-
 #faq-support div {
   display: flex;
   justify-content: center;
@@ -1395,7 +1223,7 @@ p {
 
 /* Error Styling */
 
-#container-404 {
+.container-error {
   height: 99vh;
   width: 100%;
   display: flex;

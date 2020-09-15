@@ -3,7 +3,7 @@
   <div id="product-wrapper">
     <h1 style="text-align: center">Products</h1>
     <form action="" method="POST" novalidate>
-      {{ products.hidden_tag() }}
+      {{ products.csrf_token }}
       <div>
         {{ products.name.label(class_="products-name-label-admin") }} {{
         products.name(size=20, class_="products-name-admin",
@@ -26,7 +26,7 @@
         <span style="color: red">[{{ error }}]</span>
         {% endfor %}
       </div>
-      <div>{{ products.type_(class_="products-type-admin") }}</div>
+      <div>{{ products.types(class_="products-type-admin") }}</div>
       {{ products.submit1(class_="products-submit-admin") }}
     </form>
   </div>
@@ -35,9 +35,10 @@
     <form action="" method="POST" novalidate>
       {{ orders.hidden_tag() }}
       <div>
-        {{ orders.name.label(class_="products-name-label-admin") }} {{
-        orders.name(size=20, class_="products-name-admin", placeholder="Product
-        name") }} {% for error in orders.name.errors %}
+        {{ orders.order_name.label(class_="products-name-label-admin") }} {{
+        orders.order_name(size=20, class_="products-name-admin",
+        placeholder="Product name") }} {% for error in orders.order_name.errors
+        %}
         <span style="color: red">[{{ error }}]</span>
         {% endfor %}
       </div>
