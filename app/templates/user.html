@@ -1,12 +1,10 @@
 {% extends 'base.html' %} {% block content %}
 <div id="container-user">
   <div class="info-user-profile">
-    <img src="{{ current_user.profile_img }}" alt="profile picture" />
+    <img src="{{ user.profile_img }}" alt="profile picture" />
     <span>
-      <h1>{{ current_user.username }}</h1>
-      <a href="mailto:{{ current_user.email }}"
-        >Email: {{ current_user.email }}</a
-      >
+      <h1>{{ user.username }}</h1>
+      <a href="mailto:{{ user.email }}">Email: {{ user.email }}</a>
       {% if isAdmin %}
       <a class="admin-panel-user" href="/admin_panel">Admin Panel</a>
       {% endif %}
