@@ -171,18 +171,7 @@ def user(username):
             f"{cancelform.confirm.data} has been cancelled",
         )
 
-    print(editform.errors)
     if editform.submit2.data and editform.validate():
-        if editform.name.data:
-            user_exists = User.query.filter_by(username=editform.name.data).first()
-            if not user_exists:
-                user.username = editform.name.data
-                db.session.add(user)
-                db.session.commit()
-                return redirect(f"/account/{user.username}")
-            else:
-                flash("Username exists!")
-        print(editform.profileimg.data)
         file = request.files.get(editform.profileimg.name)
         print(file)
         if file:
@@ -202,6 +191,16 @@ def user(username):
                 db.session.commit()
             else:
                 flash("Not an image!")
+
+        if editform.name.data:
+            user_exists = User.query.filter_by(username=editform.name.data).first()
+            if not user_exists:
+                user.username = editform.name.data
+                db.session.add(user)
+                db.session.commit()
+                return redirect(f"/account/{user.username}")
+            else:
+                flash("Username exists!")
         else:
             print("no!")
     ordered = user.orders.filter_by(order_flag="open")
