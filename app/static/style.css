@@ -162,7 +162,7 @@
   height: 3em;
   z-index: 1;
   background-color: #cf8b64;
-  clip-path: polygon(100% 0%, 0 0, 49% 100%);
+  clip-path: polygon(100% 0%, 0 0, 50% 100%);
 }
 
 .background-image {
@@ -183,8 +183,7 @@
 }
 
 .requirements {
-  position: relative;
-  top: 100px;
+  margin: 100px 0;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -231,27 +230,24 @@
   color: #000;
 }
 
+#products-div {
+  position: relative;
+  height: auto;
+  width: 100%;
+}
+
 .product-spacer {
   background-color: #ddb19b;
   width: 100%;
-  height: 90px;
-  position: absolute;
-  left: 50%;
-  margin: 0 auto;
-  transform: translateX(-50%);
-  top: 910px;
-  clip-path: polygon(49% 40%, 100% 100%, 0 100%);
+  height: 70px;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }
 
 .products {
-  position: absolute;
-  left: 50%;
-  margin: 0 auto;
-  transform: translateX(-50%);
-  top: 1000px;
   background-color: #ddb19b;
   width: 100%;
   text-align: center;
+  padding-bottom: 20px;
 }
 
 .list_of_products {
@@ -262,7 +258,6 @@
 .product-items {
   display: flex;
   flex-flow: column wrap;
-  height: 280px;
 }
 
 .product-items div {
@@ -271,6 +266,7 @@
   border: 1px solid black;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-flow: row nowrap;
   background-color: #d59a7a;
 }
@@ -337,8 +333,7 @@
 }
 
 #footer {
-  position: absolute;
-  top: 1340px;
+  position: relative;
   width: 100%;
   background-color: #e5c7bc;
   display: flex;
@@ -1546,66 +1541,7 @@ th {
 }
 
 @media screen and (max-width: 800px) {
-  #header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 10;
-    background-color: #fbf6f4;
-    border-radius: 0 0 5px 5px;
-  }
-
-  #header a {
-    padding-left: 5px;
-  }
-
-  #header-links-accounts {
-    position: absolute;
-    display: inline-block;
-    top: 15px;
-    right: 30px;
-  }
-
-  #header-links-account-logged-in {
-    position: absolute;
-    display: inline-block;
-    top: 15px;
-    right: 30px;
-  }
-
-  #jump-starter {
-    width: 100%;
-    height: 300px;
-  }
-
-  #catcher {
-    position: relative;
-    bottom: 60%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: column wrap;
-  }
-
-  #catcher a {
-    margin-top: 15px;
-    cursor: pointer;
-  }
-
-  .learn-more {
-    padding: 5px 10px;
-    background-color: #ff5700;
-    color: white;
-    border-radius: 7px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: font-size 0.3s ease-in-out, color 0.3s ease-in-out,
-      background-color 0.3s ease-in-out;
-  }
-
-  .learn-more:hover {
-    background-color: #cf8b64;
-    color: black;
-    font-size: 25px;
+  #footer-logo {
+    display: none;
   }
 }
