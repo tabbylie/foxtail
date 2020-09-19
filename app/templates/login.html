@@ -1,34 +1,50 @@
 {% extends "base.html" %} {% block content %}
 <div id="container-login">
-    <div id="sign-in-div">
-        <div class="login-div">
-            <h1 class="big-sign-in">Sign In</h1>
-            <form action="" method="post" novalidate>
-                {{ form.hidden_tag() }}
-                <div class="username-pass-div-signin">
-                    {{ form.username.label(class_='username-label-login') }}<br> {{ form.username(size=15, class_='username-login', autofocus=true) }}<br> {% for error in form.username.errors %}
-                    <span class="username-error-signin">[{{ error }}]</span> {% endfor %} {{ form.password.label(class_='password-label-login') }}<br> {{ form.password(size=15, class_='password-login') }}<br> {% for error in form.password.errors %}
-                    <span class="password-error-signin">[{{ error }}]</span> {% endfor %}
-                    <div class="error-messages-signin">
-                        {% with messages = get_flashed_messages() %} {% if messages %}
-                        <ul style="position: absolute; top: 700px; left: 10px;">
-                            {% for message in messages %}
-                            <li style="color: red; list-style-type: none;">{{ message }}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %} {% endwith %}
-                    </div>
-                    {{ form.remember_me(class_='remember-me-login') }} {{ form.remember_me.label(class_='remember-me-label-login') }} {{ form.submit(class_='sign-in-button-login') }}
-                </div>
-            </form>
+  <div id="sign-in-div">
+    <div class="login-div">
+      <h1 class="big-sign-in">Sign In</h1>
+      <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="username-pass-div-signin">
+          <div>
+            {{ form.username.label(class_='username-label-login') }}<br />
+            {{ form.username(class_='login-inputs', autofocus=true,
+            placeholder="Username") }}<br />
+            {% for error in form.username.errors %}
+            <span style="color: red">[{{ error }}]</span> {% endfor %} {% if
+            user_error %}
+            <span style="color: red">[{{ user_error }}]</span>
+            {% endif %}
+          </div>
+          <div>
+            {{ form.password.label(class_='password-label-login') }}<br />
+            {{ form.password(class_='login-inputs', placeholder="Password")
+            }}<br />
+            {% for error in form.password.errors %}
+            <span style="color: red">[{{ error }}]</span> {% endfor %} {% if
+            pass_error %}
+            <span style="color: red">[{{ pass_error }}]</span>
+            {% endif %}
+          </div>
+          <div id="remember-me">
+            {{ form.remember_me(class_='remember-me-login') }} {{
+            form.remember_me.label(class_='remember-me-label-login') }}
+          </div>
+          <a id="forgot-password" href="/reset_password">Forgot password?</a>
+          {{ form.submit(class_='sign-in-button-login') }}
         </div>
-        <div class="side-div-login"></div>
-        <div class="sign-up-div-login">
-            <h2>Don't have an account?</h2>
-            <h5>Create one here!</h5>
-            <p>It allows you to see all of your current, past, and cancelled orders, as well as allow a quick way for customer support to help!</p>
-            <a href='/account/register' class="join-foxtail">Join Foxtail</a>
-        </div>
+      </form>
     </div>
+    <div class="side-div-login"></div>
+    <div class="sign-up-div-login">
+      <h2>Don't have an account?</h2>
+      <h5>Create one here!</h5>
+      <p>
+        It allows you to see all of your current, past, and cancelled orders, as
+        well as allow a quick way for customer support to help!
+      </p>
+      <a href="/account/register" class="join-foxtail">Join Foxtail</a>
+    </div>
+  </div>
 </div>
 {% endblock %}

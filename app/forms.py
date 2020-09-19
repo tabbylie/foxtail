@@ -63,6 +63,11 @@ class ResetPasswordForm(FlaskForm):
     submit = SubmitField("Submit")
 
 
+class ResetPasswordVerifiedForm(FlaskForm):
+    newPass = PasswordField("Enter your new password*", validators=[DataRequired()])
+    submit = SubmitField("Submit")
+
+
 class CancelForm(FlaskForm):
     confirm = StringField("Confirm Order Name", validators=[DataRequired()])
     submit = SubmitField("Cancel it")
@@ -115,7 +120,7 @@ class UsersFormAdmin(FlaskForm):
     types = SelectField(
         "Enter what you wanna do",
         validators=[DataRequired()],
-        choices=[("list", "List"), ("search", "Search"), ('delete', 'Delete')],
+        choices=[("list", "List"), ("search", "Search"), ("delete", "Delete")],
     )
     submit3 = SubmitField("Submit")
 

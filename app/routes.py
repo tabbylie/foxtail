@@ -11,6 +11,7 @@ from app.forms import (
     UsersFormAdmin,
     EditForm,
     CustomizeForm,
+    ResetPasswordVerifiedForm,
 )
 from app.models import User, Products, Orders
 from app.email import send_mail, send_password_reset_email
@@ -101,13 +102,29 @@ def reset_password():
     if current_user.is_authenticated:
         return redirect("/")
     form = ResetPasswordForm()
-    if form.validate_on_submit():
+    if request.method == "POST" and form.validate():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
         flash("Check your email for instructions to reset your password")
         return redirect("/account/login")
     return render_template("reset_password.html", form=form)
+
+
+@app.route("/reset_password/<token>", methods=["GET", "POST"])
+def reset_password_verify(token):
+    user = User.verify_reset_token(token)
+    if not user:
+        return render_template("reset_token_error.html", title="Error!")
+    form = ResetPasswordVerifiedForm()
+    if form.validate_on_submit():
+        user.set_password(form.newPass.data)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for("login"))
+    return render_template(
+        "reset_password_verified.html", title="Reset Password", form=form
+    )
 
 
 @app.route("/account/login", methods=["GET", "POST"])
@@ -117,12 +134,15 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user is None:
-            flash("[Invalid username]")
-            return redirect("/account/login")
+        print(user)
+        if not user:
+            return render_template(
+                "login.html", title="login", form=form, user_error="Invalid username"
+            )
         if not user.check_password(form.password.data):
-            flash("[Invalid password]")
-            return redirect("/account/login")
+            return render_template(
+                "login.html", title="login", form=form, pass_error="Invalid password"
+            )
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get("next")
         if not next_page or url_parse(next_page).netloc != "":
@@ -210,7 +230,7 @@ def user(username):
     if current_user.email in [
         "dyoung8765@gmail.com",
         "officialfoxtail@gmail.com",
-        "",
+        "deadbot247@gmail.com",
     ]:
         return render_template(
             "user.html",
@@ -262,7 +282,11 @@ def tos():
 
 @app.route("/admin_panel", methods=["GET", "POST"])
 def admin_panel():
-    if current_user.email in ["dyoung8765@gmail.com", "officialfoxtail@gmail.com"]:
+    if current_user.email in [
+        "dyoung8765@gmail.com",
+        "officialfoxtail@gmail.com",
+        "deadbot247@gmail.com",
+    ]:
         productsform = ProductsFormAdmin()
         ordersform = OrdersFormAdmin()
         usersform = UsersFormAdmin()
