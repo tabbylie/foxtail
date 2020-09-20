@@ -14,7 +14,11 @@ from app.forms import (
     ResetPasswordVerifiedForm,
 )
 from app.models import User, Products, Orders
-from app.email import send_mail, send_password_reset_email
+from app.email import (
+    send_mail,
+    send_password_reset_email,
+    send_email_verification_email,
+)
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.utils import secure_filename
 from werkzeug.urls import url_parse
@@ -134,11 +138,23 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        print(user)
         if not user:
             return render_template(
-                "login.html", title="login", form=form, user_error="Invalid username"
+                "login.html",
+                title="login",
+                form=form,
+                user_error="Invalid username",
             )
+
+        if not user.isVerified:
+            return render_template(
+                "login.html",
+                title="login",
+                form=form,
+                user_error="Invalid username",
+                pass_error="Invalid password",
+            )
+
         if not user.check_password(form.password.data):
             return render_template(
                 "login.html", title="login", form=form, pass_error="Invalid password"
@@ -168,8 +184,21 @@ def register():
         db.session.add(user)
         db.session.commit()
 
+        send_email_verification_email(user)
+
         return redirect("/account/login")
     return render_template("signup.html", title="sign up", form=form)
+
+
+@app.route("/email/<token>")
+def validate_email(token):
+    user = User.verify_reset_token(token)
+    if not user:
+        return render_template("reset_token_error.html", title="Error!")
+    user.isVerified = True
+    db.session.add(user)
+    db.session.commit()
+    return redirect(url_for("login"))
 
 
 @app.route("/account/<username>", methods=["GET", "POST"])

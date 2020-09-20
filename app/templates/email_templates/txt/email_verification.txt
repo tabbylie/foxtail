@@ -1,0 +1,9 @@
+Dear {{ user.username }}, 
+
+Click on the link below to verify your email: 
+
+{{ url_for('validate_email', token=token, _external=True) }}
+
+Sincerely,
+
+FOXTAIL devs. 
