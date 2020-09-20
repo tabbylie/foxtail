@@ -16,8 +16,6 @@ class Config(object):
 
     UPLOAD_FOLDER = os.path.join(basedir, "app/static/profile_imgs/")
 
-    SQLALCHEMY_DATABASE_URI = (
-        "sqlite:///" + os.path.join(basedir, "tail.db")
-        or "postgres://wgxpnadimafppk:1b6656695ebcf832417c2bdcab0929b3cc9d93c1a4af02afe3a3219cbaca53bd@ec2-50-19-26-235.compute-1.amazonaws.com:5432/ddmqpqnpbdklb6"
+    SQLALCHEMY_DATABASE_URI = os.environ.get(DATABASE_URL)
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
