@@ -4,7 +4,6 @@
 database_adding.py
 testing.py
 tail.db
-/migrations
 /venv
 foxtail
 server.csr
