@@ -16,6 +16,8 @@ class Config(object):
 
     UPLOAD_FOLDER = os.path.join(basedir, "app/static/profile_imgs/")
 
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    SQLALCHEMY_DATABASE_URI = (
+        os.environ.get("DATABASE_URL") or f"sqlite:///{basedir}/foxtail.db"
+    )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False

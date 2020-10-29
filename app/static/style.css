@@ -65,18 +65,19 @@
   display: none;
 }
 
-.learn-more {
+#learn-more {
   padding: 5px 10px;
   background-color: #ff5700;
   color: white;
   border-radius: 7px;
   font-size: 20px;
   cursor: pointer;
+  text-decoration: none;
   transition: font-size 0.3s ease-in-out, color 0.3s ease-in-out,
     background-color 0.3s ease-in-out;
 }
 
-.learn-more:hover {
+#learn-more:hover {
   background-color: #cf8b64;
   color: black;
   font-size: 25px;
@@ -117,7 +118,6 @@
   border: 0;
   padding: 0 4px 0 4px;
   background-color: transparent;
-  font-size: 16px;
   border-radius: 5px 5px 0 0;
 }
 
@@ -1598,19 +1598,4 @@ th {
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-}
-
-@media screen and (max-width: 800px) {
-  #header {
-    width: 100%;
-  }
-
-  #favicon {
-    width: 150px;
-    height: 100px;
-  }
-
-  #footer-logo {
-    display: none;
-  }
 }
