@@ -1,6 +1,6 @@
 @media screen and (max-width: 1440px) {
   #header {
-    height: 10vh;
+    height: 5vh;
   }
 
   #favicon {
@@ -9,16 +9,27 @@
   }
 
   #header-links-accounts {
-    display: inline-block;
-    font-size: 25px;
+    font-size: 40px;
   }
 
   .dropbtn {
-    border: 0;
-    padding: 0 4px 0 4px;
-    background-color: transparent;
-    font-size: 25px;
-    border-radius: 5px 5px 0 0;
+    font-size: 40px;
+  }
+
+  .links-header:focus .dropdown-content-header {
+    display: block;
+  }
+
+  .links-header:focus .dropdown-content-header a {
+    background-color: #e5c7bc;
+  }
+  .links-header:focus .dropdown-content-header a:focus {
+    background-color: #692705;
+    color: #cf8b64;
+  } /*FF5700 */
+  .links-header:focus .dropbtn {
+    background-color: #e5c7bc;
+    color: #000;
   }
 
   .username-base {
@@ -30,9 +41,18 @@
     color: #ff5700;
   }
 
-  .background-image {
+  #jump-starter {
+    padding-top: 5vh;
+  }
+
+  .top-spacer {
     position: relative;
-    top: 10vh;
+    top: -336px;
+  }
+
+  .spacer {
+    position: relative;
+    top: -337px;
   }
 
   #catcher {
