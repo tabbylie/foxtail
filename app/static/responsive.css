@@ -104,6 +104,10 @@
     max-width: 100%;
   }
 
+  .description {
+    max-width: 150px;
+  }
+
   .price {
     padding-right: 5px;
   }
