@@ -100,9 +100,29 @@
 
   /* Product Page Styles */
 
-  
-  
+  .container-products table {
+    max-width: 100%;
+  }
+
+  .price {
+    padding-right: 5px;
+  }
+
+  .container-products table th,
+  .container-products table td {
+    font-size: 50px;
+    line-height: initial;
+  }
+
+  .button-td-products a button {
+    font-size: 45px;
+  }
+
   /* Footer styles */
+
+  #footer {
+    width: 121%;
+  }
 
   #footer-logo {
     display: none;
