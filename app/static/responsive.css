@@ -120,6 +120,10 @@
 
   /* Footer styles */
 
+  #footer {
+    width: 121%;
+  }
+
   #footer-logo {
     display: none;
   }
