@@ -1,4 +1,4 @@
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
   #header {
     height: 5vh;
   }
@@ -97,6 +97,12 @@
   .desc-items {
     font-size: 20px;
   }
+
+  /* Product Page Styles */
+
+  
+  
+  /* Footer styles */
 
   #footer-logo {
     display: none;
