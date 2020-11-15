@@ -100,14 +100,6 @@
 
   /* Product Page Styles */
 
-  .container-products table {
-    max-width: 100%;
-  }
-
-  .description {
-    max-width: 150px;
-  }
-
   .price {
     padding-right: 5px;
   }
@@ -116,6 +108,10 @@
   .container-products table td {
     font-size: 50px;
     line-height: initial;
+  }
+
+  .description p {
+    width: 300px;
   }
 
   .button-td-products a button {
