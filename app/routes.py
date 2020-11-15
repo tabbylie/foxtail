@@ -299,7 +299,7 @@ def support():
     return render_template("support.html", title="Support", form=form)
 
 
-@app.route("/about_the_devs")
+@app.route("/about the devs")
 def ATD():
     return render_template("about_the_devs.html", title="about the devs")
 
